@@ -1,6 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React from 'react'
 import GroupSvg from './svgs/group'
-import HamburgerSvg from './svgs/hamburger'
 import NewspaperSvg from './svgs/newspaper'
 import PersonSvg from './svgs/person'
 import RelationshipsSvg from './svgs/relationships'
@@ -10,24 +9,17 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import colors from './colors'
 
-const StyledNavigator = styled.div`
-`
-
-
-const Header = styled.header`
-    background-color: ${colors.red1};
-    color: ${colors.white1};
-    padding: 5px 0px;
-    text-align: center
-`
-
 const Apps = styled.ul`
+    position:fixed;
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 20px 0;
     list-style: none;
+    transform: translateY(${({ hidden }) => hidden ? '-100%' : '0%'});
+    transition: transform 0.5s;
+    backdrop-filter: blur(2px);
 `
 
 const StyledAppLink = styled(Link)`
@@ -39,6 +31,7 @@ const StyledAppLink = styled(Link)`
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
     }
+    margin: 5px 0;
 `
 
 const AppSvg = styled.div`
@@ -59,41 +52,35 @@ const AppLink = ({ Svg, link, name, onClick }) => {
                 to={link}
             >
                 <AppSvg>
-                    <Svg width={35} height={35}/>
+                    <Svg width={35} height={35} />
                 </AppSvg>
                 {name}
             </StyledAppLink>
         </li>)
 }
 
-const Navigator = () => {
-    const [hasAppsOpened, setAppsOpened] = useState(true)
+const apps = [
+    { name: 'Map', Svg: WorldMapSvg, link: '/map' },
+    { name: 'Messenger', Svg: SpeechBubleSvg, link: '/messenger' },
+    { name: 'Couterie', Svg: GroupSvg, link: '/couterie' },
+    { name: 'News', Svg: NewspaperSvg, link: '/news' },
+    { name: 'Status', Svg: PersonSvg, link: '/status' },
+    { name: 'Relationships', Svg: RelationshipsSvg, link: '/relationships' },
+]
 
-    const apps = [
-        {name:'Map', Svg: WorldMapSvg, link: '/map'},
-        {name:'Messenger', Svg: SpeechBubleSvg, link: '/messenger'},
-        {name:'Couterie', Svg: GroupSvg, link: '/couterie'},
-        {name:'News', Svg: NewspaperSvg, link: '/news'},
-        {name:'Status', Svg: PersonSvg, link: '/status'},
-        {name:'Relationships', Svg: RelationshipsSvg, link: '/relationships'},
-    ]
-
-    const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
+const Navigator = ({ hidden, onClick }) => {
     return (
-        <StyledNavigator>
-            <Header onClick={toggleHasAppsOpened}>APPS</Header>
-            {hasAppsOpened && (<Apps>
-                {apps.map(({name, Svg, link}) => (
-                    <AppLink
-                        key={name}
-                        link={link}
-                        name={name}
-                        Svg={Svg}
-                        onClick={toggleHasAppsOpened}
-                    />
-                ))}
-            </Apps>)}
-        </StyledNavigator>
+        <Apps hidden={hidden}>
+            {apps.map(({ name, Svg, link }) => (
+                <AppLink
+                    key={name}
+                    link={link}
+                    name={name}
+                    Svg={Svg}
+                    onClick={onClick}
+                />
+            ))}
+        </Apps>
     )
 }
 
