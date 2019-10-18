@@ -123,6 +123,12 @@ const StatusApp = () => {
     const { general, anxiety, humanity, damage, stats } = data
     const { attributes, skills, disciplines } = stats
     return (<StyledApp>
+        <Columns>
+            {
+                Object.entries(general)
+                    .map(([label, value]) => (<li>{label}: {value}</li>))
+                }
+        </Columns>
         <SectionTitle>Resources</SectionTitle>
         <Columns amount={2}>
             <Resource label='anxiety' amount={anxiety} maxAmount={5} />
