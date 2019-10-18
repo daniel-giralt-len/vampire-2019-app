@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --port 3000 --host 0.0.0.0",
+    "client:dev": "webpack-dev-server --port 3000 --host 0.0.0.0",
+    "server:dev": "nodemon src/server/index.js --exec babel-node --presets @babel/preset-env",
     "build": "webpack --mode production"
   },
   "lint-staged": {
@@ -17,6 +18,9 @@
     }
   },
   "license": "MIT",
+  "nodemonConfig": {
+    "ignore": ["src/client/*"]
+  },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.3",
@@ -26,6 +30,8 @@
     "eslint-plugin-react": "^7.16.0",
     "husky": "^3.0.9",
     "lint-staged": "^10.0.0-0",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
     "ol": "^6.0.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
@@ -36,5 +42,10 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.2"
+  },
+  "dependencies": {
+    "@babel/node": "^7.6.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   }
 }
