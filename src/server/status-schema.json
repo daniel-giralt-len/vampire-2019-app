@@ -2,18 +2,18 @@
     "general":{
         "name":"",
         "clan":"",
-        "generation":"",
-        "anxiety": 1,
-        "humanity": 8
+        "generation":""
     },
+    "anxiety": 1,
+    "humanity": 8,
     "damage": {
         "physical": {
-            "superficial": 1,
+            "superficial": 5,
             "aggravated": 3
         },
         "willpower": {
-            "superficial": 0,
-            "aggravated": 1
+            "superficial": 1,
+            "aggravated": 8
         }
     },
     "stats": {
