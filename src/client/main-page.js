@@ -1,11 +1,14 @@
 import React, { Fragment, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import News from './apps/news'
+import Status from './apps/status'
 import Navigator from './navigator'
 import styled from 'styled-components'
 import colors from './colors'
 
-const StyledRouter = styled(Router)`
+const StyledMain = styled.div`
+    display: flex;
+    flex-direction: column;
     height: 100%;
 `
 
@@ -20,7 +23,7 @@ const MainPage = () => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     return (
-        <StyledRouter>
+        <StyledMain>
             <Router>
                 <Navigator
                     hidden={!hasAppsOpened}
@@ -32,12 +35,12 @@ const MainPage = () => {
                     <Route exact path='/messenger'>messenger</Route>
                     <Route exact path='/couterie'>couterie</Route>
                     <Route exact path='/news'><News/></Route>
-                    <Route exact path='/status'>status</Route>
+                    <Route exact path='/status'><Status/></Route>
                     <Route exact path='/relationships'>relationships</Route>
                 </Switch>
             </Router>
             <NavigationOpener onClick={toggleHasAppsOpened}>APPS</NavigationOpener>
-        </StyledRouter>)
+        </StyledMain>)
 }
 
 export default MainPage
