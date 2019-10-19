@@ -7,7 +7,6 @@ import SpeechBubleSvg from './svgs/speech-bubble'
 import WorldMapSvg from './svgs/world-map'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import colors from './colors'
 
 const Apps = styled.ul`
     position:fixed;
@@ -27,7 +26,7 @@ const StyledAppLink = styled(Link)`
     flex-direction: column;
     align-items: center;
     text-decoration: none;
-    color: ${colors.black1};
+    color: ${({theme}) => theme.font};
     &:focus, &:hover, &:visited, &:link, &:active {
         text-decoration: none;
     }
@@ -37,7 +36,7 @@ const StyledAppLink = styled(Link)`
 const AppSvg = styled.div`
     width: 50px;
     height: 50px;
-    background-color: ${colors.black1};
+    background-color: ${({theme}) => theme.background};
     border-radius: 50px;
     display: flex;
     align-items: center;

@@ -1,12 +1,11 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import colors from './colors'
 import Cog from './svgs/cog'
 import translate, { availableLanguages, Language } from './translate-component'
 
 const StyledHeader = styled.header`
-    background-color: ${colors.blue1};
-    color: ${colors.white1};
+    background-color: ${({theme}) => theme.blue1};
+    color: ${({theme}) => theme.white1};
     padding: 10px 0px;
     font-size: 2em;
     display: flex;
@@ -16,8 +15,8 @@ const StyledHeader = styled.header`
 `
 
 const ConfigMenu = styled.div`
-  background-color: ${colors.black1};
-  color: ${colors.white1};
+  background-color: ${({theme}) => theme.background};
+  color: ${({theme}) => theme.font};
   padding: 10px;
   display: flex;
   justify-content: space-between;

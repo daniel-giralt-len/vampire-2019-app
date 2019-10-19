@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import colors from '../colors'
 import API from '../api'
 import translate from '../translate-component'
 
@@ -11,9 +10,9 @@ const StyledApp = styled.main`
 `
 
 const SectionTitle = styled.h2`
-    color: ${colors.red1}
+    color: ${({theme}) => theme.title}
     width: 100%;
-    border-bottom: 3px solid ${colors.red1}
+    border-bottom: 3px solid ${({theme}) => theme.title}
     text-align: center;
     padding-bottom: 3px;
     margin-bottom: 5px;
@@ -22,19 +21,19 @@ const SectionTitle = styled.h2`
 const Square = styled.div`
     display: inline-block;
     margin-right: 5px;
-    ${({ full, half }) => {
+    ${({ full, half, theme }) => {
         if (full) {
-            return `background-color: ${colors.black1};`
+            return `background-color: ${theme.font};`
         }
         if (half) {
-            return `background: linear-gradient(to right, transparent 50%, ${colors.black1} 50%);`
+            return `background: linear-gradient(to right, transparent 50%, ${theme.font} 50%);`
         }
     }}
-    ${({ size = '1em' }) => {
+    ${({ size = '1em', theme }) => {
         return `
         width: ${size};
         height: ${size};
-        border: 1px solid ${colors.black1}
+        border: 1px solid ${theme.font}
         `
     }}
 `
