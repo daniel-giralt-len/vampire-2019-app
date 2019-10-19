@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import colors from '../colors'
 import API from '../api'
+import translate from '../translate-component'
 
 const StyledApp = styled.main`
     flex-grow: 1;
@@ -98,7 +99,7 @@ const Stat = ({ label, amount }) => {
     )
 }
 
-const StatsSection = ({ stats }) => {
+const StatsSection = translate(({ stats, t, type: sectionType }) => {
     return (<StatTypeColumns>
         {Object.keys(stats).map(type => {
             return <StatColumn
@@ -106,13 +107,13 @@ const StatsSection = ({ stats }) => {
                 type={type}
             >
                 {Object.entries(stats[type])
-                    .map(([label, amount]) => (<Stat label={label} key={label} amount={amount} />))}
+                    .map(([label, amount]) => (<Stat label={t(`stats.${sectionType}.${label}`)} key={label} amount={amount} />))}
             </StatColumn>
         })}
     </StatTypeColumns>)
-}
+})
 
-const StatusApp = () => {
+const StatusApp = ({t}) => {
     const [data, setData] = useState(undefined)
     useEffect(() => {
         API.getPlayerData('Clara')
@@ -129,34 +130,34 @@ const StatusApp = () => {
                     .map(([label, value]) => (<li key={label}>{label}: {value}</li>))
                 }
         </Columns>
-        <SectionTitle>Resources</SectionTitle>
+        <SectionTitle>{t('stats.resources')}</SectionTitle>
         <Columns amount={2}>
-            <Resource label='anxiety' amount={anxiety} maxAmount={5} />
-            <Resource label='humanity' amount={humanity} />
+            <Resource label={t('stats.resource.anxiety')} amount={anxiety} maxAmount={5} />
+            <Resource label={t('stats.resource.humanity')} amount={humanity} />
             {
                 Object.entries(damage)
                     .map(([label, { superficial, aggravated }]) => (
                         <Damage
                             key={label}
                             aggravated={aggravated}
-                            label={label}
+                            label={t(`stats.damage.${label}`)}
                             superficial={superficial}
                         />
                     ))
             }
         </Columns>
-        <SectionTitle>Disciplines</SectionTitle>
+        <SectionTitle>{t('stats.disciplines')}</SectionTitle>
         <Columns>
             {
                 Object.entries(disciplines)
-                    .map(([label, amount]) => (<Stat key={label} label={label} amount={amount} />))
+                    .map(([label, amount]) => (<Stat key={label} label={t(`stats.disciplines.${label}`)} amount={amount} />))
             }
         </Columns>
-        <SectionTitle>Attributes</SectionTitle>
-        <StatsSection stats={attributes} />
-        <SectionTitle>Skills</SectionTitle>
-        <StatsSection stats={skills} />
+        <SectionTitle>{t('stats.attributes')}</SectionTitle>
+        <StatsSection type='attributes' stats={attributes} />
+        <SectionTitle>{(t('stats.skills'))}</SectionTitle>
+        <StatsSection type='skills' stats={skills} />
     </StyledApp>)
 }
 
-export default StatusApp
+export default translate(StatusApp)

@@ -22,7 +22,7 @@ const NavigationOpener = styled.footer`
 
 const MainPage = ({t}) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
-    const [language] = useState('en')
+    const [language] = useState('ca')
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     return (
         <Language.Provider value={language}>

@@ -1,8 +1,12 @@
 import React, { useContext } from 'react'
+import ca from './translations/ca.json'
 import en from './translations/en.json'
+import es from './translations/es.json'
 
 const languages = {
+    ca,
     en,
+    es,
 }
 
 const getTranslation = (language) => {
@@ -13,6 +17,8 @@ const getTranslation = (language) => {
         }
         if(!languages[language][id]){
             console.warn(`no translation for ${id} in language ${language}`)
+            window.l = window.l || []
+            window.l.push(id)
             return id
         }
         return languages[language][id]
