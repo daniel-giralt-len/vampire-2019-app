@@ -7,6 +7,7 @@ import translate from '../translate-component'
 const StyledApp = styled.main`
     flex-grow: 1;
     overflow-y: scroll;
+    padding: 3vh 3vw 0.5vh 3vw;
 `
 
 const SectionTitle = styled.h2`
@@ -19,9 +20,8 @@ const SectionTitle = styled.h2`
 `
 
 const Square = styled.div`
-    font-size: 4px;
-    text-align: center;
     display: inline-block;
+    margin-right: 5px;
     ${({ full, half }) => {
         if (full) {
             return `background-color: ${colors.black1};`
@@ -30,7 +30,7 @@ const Square = styled.div`
             return `background: linear-gradient(to right, transparent 50%, ${colors.black1} 50%);`
         }
     }}
-    ${({ size = '2em' }) => {
+    ${({ size = '1em' }) => {
         return `
         width: ${size};
         height: ${size};
@@ -40,11 +40,11 @@ const Square = styled.div`
 `
 
 const Circle = styled(Square)`
-    ${({ size = '2em' }) => `border-radius: ${size};`}
+    ${({ size = '1em' }) => `border-radius: ${size};`}
 `
 
 const Damage = ({ label, superficial, aggravated }) => {
-    return (<StyledStat>
+    return (<li>
         <div>{label}</div>
         <div>
             {
@@ -58,7 +58,7 @@ const Damage = ({ label, superficial, aggravated }) => {
                     })
             }
         </div>
-    </StyledStat>)
+    </li>)
 }
 
 const Columns = styled.ul`
@@ -80,14 +80,12 @@ const StatColumn = styled.div`
 
 const Resource = ({ label, amount, maxAmount = 10, CounterComponent = Square }) => {
     return (
-        <StyledStat>
+        <li>
             <div>{label}</div>
             <div>{Array(maxAmount).fill().map((_, index) => (<CounterComponent key={index} full={index < amount} />))}</div>
-        </StyledStat>
+        </li>
     )
 }
-
-const StyledStat = styled.li``
 
 const Stat = ({ label, amount }) => (
     <Resource label={label}
