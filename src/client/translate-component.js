@@ -17,8 +17,8 @@ const getTranslation = (language) => {
         }
         if(!languages[language][id]){
             console.warn(`no translation for ${id} in language ${language}`)
-            window.l = window.l || []
-            window.l.push(id)
+            window.missingTranslation = window.missingTranslation || {}
+            window.missingTranslation[id] = ''
             return id
         }
         return languages[language][id]
