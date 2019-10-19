@@ -1,4 +1,7 @@
 {
+  "stats.name": "Nom",
+  "stats.clan": "Clan",
+  "stats.generation": "Generació",
   "main.footer.apps": "Aplicacions",
   "stats.resources": "Recursos",
   "stats.resource.anxiety": "Ansia",

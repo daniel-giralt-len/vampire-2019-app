@@ -127,7 +127,7 @@ const StatusApp = ({t}) => {
         <Columns>
             {
                 Object.entries(general)
-                    .map(([label, value]) => (<li key={label}>{label}: {value}</li>))
+                    .map(([label, value]) => (<li key={label}>{t(`stats.${label}`)}: {value}</li>))
                 }
         </Columns>
         <SectionTitle>{t('stats.resources')}</SectionTitle>
