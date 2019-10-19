@@ -24,12 +24,14 @@ const NavigationFooter = styled.footer`
 
 const MainPage = ({t}) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
-    const [language] = useState('ca')
+    const [language, setLanguage] = useState('ca')
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     return (
         <Language.Provider value={language}>
             <StyledMain>
-                <Header/>
+                <Header
+                    onLanguageChange={setLanguage}
+                />
                 <Router>
                     <Navigator
                         hidden={!hasAppsOpened}
