@@ -22,8 +22,15 @@ const Square = styled.div`
     font-size: 4px;
     text-align: center;
     display: inline-block;
-    ${({ full }) => full ? `background-color: ${colors.black1};` : ''}
-    ${({ size = '5px' }) => {
+    ${({ full, half }) => {
+        if (full) {
+            return `background-color: ${colors.black1};`
+        }
+        if (half) {
+            return `background: linear-gradient(to right, transparent 50%, ${colors.black1} 50%);`
+        }
+    }}
+    ${({ size = '2em' }) => {
         return `
         width: ${size};
         height: ${size};
@@ -33,32 +40,32 @@ const Square = styled.div`
 `
 
 const Circle = styled(Square)`
-    ${({ size = '5px' }) => `border-radius: ${size};`}
+    ${({ size = '2em' }) => `border-radius: ${size};`}
 `
 
 const Damage = ({ label, superficial, aggravated }) => {
-    return (<StyledResource>
+    return (<StyledStat>
         <div>{label}</div>
-        <div>{
-            Array(10)
-                .fill()
-                .map((_, index) => {
-                    let text = ' '
-                    if(index < aggravated){
-                        text = 'X'
-                    }else if(index < aggravated + superficial){
-                        text = '/'
-                    }
-                    return (<Square key={index}>{text}</Square>)
-                })
+        <div>
+            {
+                Array(10).fill()
+                    .map((_, index) => {
+                        return (<Square
+                            key={index}
+                            full={index < aggravated}
+                            half={index < aggravated + superficial}
+                        />)
+                    })
             }
         </div>
-    </StyledResource>)
+    </StyledStat>)
 }
 
 const Columns = styled.ul`
     display: grid;
     grid-template-columns: repeat(${({ amount = 3 }) => amount},1fr);
+    margin: 0;
+    padding: 0;
     list-style: none;
 `
 
@@ -67,37 +74,28 @@ const StatTypeColumns = styled(Columns)`
         "physical social mental";
 `
 
-const StatColumn = styled.ul`
-    list-style: none;
-    margin: 0;
-    padding: 0;
+const StatColumn = styled.div`
     grid-area: ${({ type }) => type};
 `
 
-const StyledResource = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-
-const Resource = ({ label, amount, maxAmount = 10 }) => {
+const Resource = ({ label, amount, maxAmount = 10, CounterComponent = Square }) => {
     return (
-        <StyledResource>
+        <StyledStat>
             <div>{label}</div>
-            <div>{Array(maxAmount).fill().map((_, index) => (<Square key={index} full={index < amount} />))}</div>
-        </StyledResource>
+            <div>{Array(maxAmount).fill().map((_, index) => (<CounterComponent key={index} full={index < amount} />))}</div>
+        </StyledStat>
     )
 }
 
 const StyledStat = styled.li``
 
-const Stat = ({ label, amount }) => {
-    return (
-        <StyledStat>
-            <div>{label}</div>
-            <div>{Array(5).fill().map((_, index) => (<Circle key={index} full={index < amount} />))}</div>
-        </StyledStat>
-    )
-}
+const Stat = ({ label, amount }) => (
+    <Resource label={label}
+        amount={amount}
+        maxAmount={5}
+        CounterComponent={Circle}
+    />
+)
 
 const StatsSection = translate(({ stats, t, type: sectionType }) => {
     return (<StatTypeColumns>
@@ -113,7 +111,7 @@ const StatsSection = translate(({ stats, t, type: sectionType }) => {
     </StatTypeColumns>)
 })
 
-const StatusApp = ({t}) => {
+const StatusApp = ({ t }) => {
     const [data, setData] = useState(undefined)
     useEffect(() => {
         API.getPlayerData('Clara')
@@ -128,7 +126,7 @@ const StatusApp = ({t}) => {
             {
                 Object.entries(general)
                     .map(([label, value]) => (<li key={label}>{t(`stats.${label}`)}: {value}</li>))
-                }
+            }
         </Columns>
         <SectionTitle>{t('stats.resources')}</SectionTitle>
         <Columns amount={2}>
