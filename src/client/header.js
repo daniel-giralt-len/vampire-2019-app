@@ -1,27 +1,70 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import colors from './colors'
-import translate, { Language } from './translate-component'
+import Cog from './svgs/cog'
+import translate, { availableLanguages, Language } from './translate-component'
 
 const StyledHeader = styled.header`
     background-color: ${colors.blue1};
     color: ${colors.white1};
-    padding: 7px 0px;
+    padding: 10px 0px;
     font-size: 2em;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 `
 
-const Header = ({ onLanguageChange, t }) => {
-  const [isLanguageListOpen, setLanguageList] = useState(false)
-  const toggleLanguageList = () => setLanguageList(!isLanguageListOpen)
+const ConfigMenu = styled.div`
+  background-color: ${colors.black1};
+  color: ${colors.white1};
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  width: 50%;
+`
+
+const LanguageButton = styled.button`
+  font-size: 1em;
+  margin-right: 5px;
+`
+const Toggle = styled.button`
+  font-size: 1em;
+`
+
+const Header = ({ onThemeToggle, onLanguageChange, t }) => {
+  const [isConfigOpen, setConfig] = useState(false)
+  const toggleConfigMenu = () => setConfig(!isConfigOpen)
   const language = useContext(Language)
-  return (<StyledHeader>
-    <div>Rainy</div>
-    <div>13:52</div>
-    <div onClick={toggleLanguageList}>{t(`header.${language}`)}</div>
-  </StyledHeader>)
+  const theme = 0//useContext(Theme)
+  return (
+    <div>
+      <StyledHeader>
+        <div>Rainy</div>
+        <div>13:52</div>
+        <div onClick={toggleConfigMenu} ><Cog width='1.2em' height='1.2em' /></div>
+      </StyledHeader>
+      {isConfigOpen && <ConfigMenu>
+        <div>
+          {
+            availableLanguages
+              .map(lang => (<LanguageButton
+                key={lang}
+                disabled={lang === language}
+                onClick={() => onLanguageChange(lang)}
+              >
+                {t(`header.${lang}`)}
+              </LanguageButton>))
+          }
+        </div>
+        <Toggle onClick={onThemeToggle}>
+          {theme === 'light' ? t('header.dark') : t('header.light')}
+        </Toggle>
+      </ConfigMenu>}
+    </div>)
 }
 
 export default translate(Header)

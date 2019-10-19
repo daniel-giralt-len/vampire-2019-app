@@ -2,6 +2,8 @@
   "header.en": "English",
   "header.es": "Spanish",
   "header.ca": "Catalan",
+  "header.light": "Light",
+  "header.dark": "Dark",
   "stats.name": "Name",
   "stats.clan": "Clan",
   "stats.generation": "Generation",

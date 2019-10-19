@@ -39,5 +39,10 @@ const translateComponent = (Component) => {
     }
 }
 
+const availableLanguages = Object.keys(languages)
+
 export default translateComponent
-export { Language }
+export { 
+    Language,
+    availableLanguages
+}
