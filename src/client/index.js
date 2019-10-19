@@ -15,5 +15,5 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render((<Fragment>
     <GlobalStyle whiteColor />
-    <MainPage /> {/* example of other top-level stuff */}
+    <MainPage />
 </Fragment>), document.querySelector('#root'))
