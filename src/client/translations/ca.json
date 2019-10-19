@@ -1,4 +1,7 @@
 {
+  "header.en": "Anglès",
+  "header.es": "Espanyol",
+  "header.ca": "Català",
   "stats.name": "Nom",
   "stats.clan": "Clan",
   "stats.generation": "Generació",

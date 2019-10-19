@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import News from './apps/news'
 import Status from './apps/status'
 import Navigator from './navigator'
+import Header from './header'
 import styled from 'styled-components'
 import colors from './colors'
 import translate, { Language } from './translate-component'
@@ -13,9 +14,10 @@ const StyledMain = styled.div`
     height: 100%;
 `
 
-const NavigationOpener = styled.footer`
+const NavigationFooter = styled.footer`
     background-color: ${colors.red1};
     color: ${colors.white1};
+    font-size: 2em;
     padding: 5px 0px;
     text-align: center;
 `
@@ -27,6 +29,7 @@ const MainPage = ({t}) => {
     return (
         <Language.Provider value={language}>
             <StyledMain>
+                <Header/>
                 <Router>
                     <Navigator
                         hidden={!hasAppsOpened}
@@ -42,7 +45,7 @@ const MainPage = ({t}) => {
                         <Route exact path='/relationships'>relationships</Route>
                     </Switch>
                 </Router>
-                <NavigationOpener onClick={toggleHasAppsOpened}>{t('main.footer.apps')}</NavigationOpener>
+                <NavigationFooter onClick={toggleHasAppsOpened}>{t('main.footer.apps')}</NavigationFooter>
             </StyledMain>
         </Language.Provider>
     )
