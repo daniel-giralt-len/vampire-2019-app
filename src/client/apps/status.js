@@ -36,7 +36,6 @@ const Circle = styled(Square)`
 `
 
 const Damage = ({ label, superficial, aggravated }) => {
-    console.log(superficial,aggravated)
     return (<StyledResource>
         <div>{label}</div>
         <div>{
@@ -49,7 +48,7 @@ const Damage = ({ label, superficial, aggravated }) => {
                     }else if(index < aggravated + superficial){
                         text = '/'
                     }
-                    return (<Square>{text}</Square>)
+                    return (<Square key={index}>{text}</Square>)
                 })
             }
         </div>
@@ -83,7 +82,7 @@ const Resource = ({ label, amount, maxAmount = 10 }) => {
     return (
         <StyledResource>
             <div>{label}</div>
-            <div>{Array(maxAmount).fill().map((_, index) => (<Square full={index < amount} />))}</div>
+            <div>{Array(maxAmount).fill().map((_, index) => (<Square key={index} full={index < amount} />))}</div>
         </StyledResource>
     )
 }
@@ -94,7 +93,7 @@ const Stat = ({ label, amount }) => {
     return (
         <StyledStat>
             <div>{label}</div>
-            <div>{Array(5).fill().map((_, index) => (<Circle full={index < amount} />))}</div>
+            <div>{Array(5).fill().map((_, index) => (<Circle key={index} full={index < amount} />))}</div>
         </StyledStat>
     )
 }
@@ -103,10 +102,11 @@ const StatsSection = ({ stats }) => {
     return (<StatTypeColumns>
         {Object.keys(stats).map(type => {
             return <StatColumn
+                key={type}
                 type={type}
             >
                 {Object.entries(stats[type])
-                    .map(([label, amount]) => (<Stat label={label} amount={amount} />))}
+                    .map(([label, amount]) => (<Stat label={label} key={label} amount={amount} />))}
             </StatColumn>
         })}
     </StatTypeColumns>)
@@ -126,7 +126,7 @@ const StatusApp = () => {
         <Columns>
             {
                 Object.entries(general)
-                    .map(([label, value]) => (<li>{label}: {value}</li>))
+                    .map(([label, value]) => (<li key={label}>{label}: {value}</li>))
                 }
         </Columns>
         <SectionTitle>Resources</SectionTitle>
@@ -137,6 +137,7 @@ const StatusApp = () => {
                 Object.entries(damage)
                     .map(([label, { superficial, aggravated }]) => (
                         <Damage
+                            key={label}
                             aggravated={aggravated}
                             label={label}
                             superficial={superficial}
@@ -148,7 +149,7 @@ const StatusApp = () => {
         <Columns>
             {
                 Object.entries(disciplines)
-                    .map(([label, amount]) => (<Stat label={label} amount={amount} />))
+                    .map(([label, amount]) => (<Stat key={label} label={label} amount={amount} />))
             }
         </Columns>
         <SectionTitle>Attributes</SectionTitle>
