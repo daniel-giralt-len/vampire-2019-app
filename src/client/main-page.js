@@ -22,6 +22,12 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.font};
     background-color: ${({ theme }) => theme.background};
   }
+  button {
+    font-family: 'Venetian 301';
+    border: none;
+    color: ${({ theme }) => theme.font};
+    background: none;    
+  }
   #root {
       height: 100%;
   }
@@ -35,7 +41,7 @@ const StyledMain = styled.div`
 
 const NavigationFooter = styled.footer`
     background-color: ${({ theme }) => theme.red1};
-    color: ${({ theme }) => theme.font};
+    color: ${({ theme }) => theme.white1};
     font-size: 2em;
     padding: 5px 0px;
     text-align: center;
@@ -55,6 +61,7 @@ const MainPage = ({ t }) => {
                     <Header
                         onLanguageChange={setLanguage}
                         onThemeToggle={toggleTheme}
+                        theme={currentTheme}
                     />
                     <Router>
                         <Navigator

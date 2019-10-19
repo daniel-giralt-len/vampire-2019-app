@@ -4,8 +4,8 @@ import Cog from './svgs/cog'
 import translate, { availableLanguages, Language } from './translate-component'
 
 const StyledHeader = styled.header`
-    background-color: ${({theme}) => theme.blue1};
-    color: ${({theme}) => theme.white1};
+    background-color: ${({ theme }) => theme.blue1};
+    color: ${({ theme }) => theme.white1};
     padding: 10px 0px;
     font-size: 2em;
     display: flex;
@@ -15,54 +15,63 @@ const StyledHeader = styled.header`
 `
 
 const ConfigMenu = styled.div`
-  background-color: ${({theme}) => theme.background};
-  color: ${({theme}) => theme.font};
+  background-color: ${({ theme }) => theme.red1};
+  color: ${({ theme }) => theme.white1};
   padding: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: absolute;
   right: 0;
-  width: 50%;
+  font-size: 2em;
+  min-width: 250px;
 `
 
 const LanguageButton = styled.button`
   font-size: 1em;
   margin-right: 5px;
+  color: ${({ theme }) => theme.background};
+  &:disabled{
+    color: ${({ theme }) => theme.grey1};
+  }
 `
 const Toggle = styled.button`
+  margin-top: 1em;
   font-size: 1em;
+  color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.font};
 `
 
-const Header = ({ onThemeToggle, onLanguageChange, t }) => {
+const SvgContainer = styled.div`display:flex;`
+
+const Header = ({ onThemeToggle, onLanguageChange, t, theme }) => {
   const [isConfigOpen, setConfig] = useState(false)
   const toggleConfigMenu = () => setConfig(!isConfigOpen)
   const language = useContext(Language)
-  const theme = 0//useContext(Theme)
   return (
     <div>
       <StyledHeader>
         <div>Rainy</div>
         <div>13:52</div>
-        <div onClick={toggleConfigMenu} ><Cog width='1.2em' height='1.2em' /></div>
+        <SvgContainer onClick={toggleConfigMenu} ><Cog width='1.2em' height='1.2em' /></SvgContainer>
       </StyledHeader>
       {isConfigOpen && <ConfigMenu>
-        <div>
-          {
-            availableLanguages
-              .map(lang => (<LanguageButton
-                key={lang}
-                disabled={lang === language}
-                onClick={() => onLanguageChange(lang)}
-              >
-                {t(`header.${lang}`)}
-              </LanguageButton>))
-          }
-        </div>
+        {
+          availableLanguages
+            .map(lang => (<LanguageButton
+              key={lang}
+              disabled={lang === language}
+              onClick={() => onLanguageChange(lang)}
+            >
+              {t(`header.${lang}`)}
+            </LanguageButton>))
+        }
         <Toggle onClick={onThemeToggle}>
           {theme === 'light' ? t('header.dark') : t('header.light')}
         </Toggle>
-      </ConfigMenu>}
+      </ConfigMenu>
+      }
     </div>)
 }
 

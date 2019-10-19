@@ -3,7 +3,8 @@ const palette = {
     blue1: '#0b0a3a',
     red1: '#a90936',
     white1: '#f7f7f7',
-    red2: '#e4547c'
+    red2: '#e4547c',
+    grey1: '#969696'
 }
 
 const lightTheme = {
