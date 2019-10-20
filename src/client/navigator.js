@@ -5,39 +5,40 @@ import PersonSvg from './svgs/person'
 import RelationshipsSvg from './svgs/relationships'
 import SpeechBubleSvg from './svgs/speech-bubble'
 import WorldMapSvg from './svgs/world-map'
+import Cross from './svgs/cross'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Apps = styled.ul`
-    position:fixed;
-    width: 100%;
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-    margin: 0;
-    padding: 20px 0;
-    list-style: none;
-    transform: translateY(${({ hidden }) => hidden ? '-100%' : '0%'});
+    grid-template-columns: repeat(${({amount}) => amount},1fr);
+    column-gap: 5px;
+    padding: 10px 3px;
+
+    bottom: 0;
+    overflow-x: scroll;
+    width: 100%;
+
+    background-color: ${({theme}) => theme.black1};
+    color: ${({ theme }) => theme.white1}
+    position:fixed;
+    box-shadow: 0px -2px 20px black;
+
     transition: transform 0.5s;
-    backdrop-filter: blur(2px);
+    transform: scaleY(${({hidden}) => hidden ? 0 : 1});
+    transform-origin: bottom;
 `
 
 const StyledAppLink = styled(Link)`
     display: flex;
     flex-direction: column;
+    justify-direction: center;
     align-items: center;
     text-decoration: none;
-    color: ${({theme}) => theme.font};
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
-    margin: 5px 0;
+    font-size: 2em;
 `
 
 const AppSvg = styled.div`
-    width: 50px;
-    height: 50px;
-    background-color: ${({theme}) => theme.background};
-    border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,17 +46,16 @@ const AppSvg = styled.div`
 
 const AppLink = ({ Svg, link, name, onClick }) => {
     return (
-        <li>
             <StyledAppLink
                 onClick={onClick}
                 to={link}
             >
                 <AppSvg>
-                    <Svg width={35} height={35} />
+                    <Svg width='100px' height='100px' />
                 </AppSvg>
                 {name}
             </StyledAppLink>
-        </li>)
+        )
 }
 
 const apps = [
@@ -64,12 +64,12 @@ const apps = [
     { name: 'Couterie', Svg: GroupSvg, link: '/couterie' },
     { name: 'News', Svg: NewspaperSvg, link: '/news' },
     { name: 'Status', Svg: PersonSvg, link: '/status' },
-    { name: 'Relationships', Svg: RelationshipsSvg, link: '/relationships' },
+    { name: 'Bonds', Svg: RelationshipsSvg, link: '/relationships' },
 ]
 
-const Navigator = ({ hidden, onClick }) => {
+const Navigator = ({ hidden, onClick, onCloseApps }) => {
     return (
-        <Apps hidden={hidden}>
+        <Apps amount={apps.length+1} hidden={hidden}>
             {apps.map(({ name, Svg, link }) => (
                 <AppLink
                     key={name}
@@ -79,6 +79,10 @@ const Navigator = ({ hidden, onClick }) => {
                     onClick={onClick}
                 />
             ))}
+            <AppLink
+                Svg={Cross}
+                onClick={onCloseApps}
+            />
         </Apps>
     )
 }

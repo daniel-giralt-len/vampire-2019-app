@@ -22,6 +22,17 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.font};
     background-color: ${({ theme }) => theme.background};
   }
+  a{
+    color: inherit;
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+  }
+  ul, li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+  }
   button {
     font-family: 'Venetian 301';
     border: none;
@@ -51,6 +62,7 @@ const MainPage = ({ t }) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
     const [language, setLanguage] = useState('ca')
     const [currentTheme, setCurrentTheme] = useState('light')
+
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
     return (
@@ -67,6 +79,7 @@ const MainPage = ({ t }) => {
                         <Navigator
                             hidden={!hasAppsOpened}
                             onClick={toggleHasAppsOpened}
+                            onCloseApps={toggleHasAppsOpened}
                         />
                         <Switch>
                             <Route exact path='/'>/</Route>

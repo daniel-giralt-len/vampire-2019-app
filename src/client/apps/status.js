@@ -63,9 +63,6 @@ const Damage = ({ label, superficial, aggravated }) => {
 const Columns = styled.ul`
     display: grid;
     grid-template-columns: repeat(${({ amount = 3 }) => amount},1fr);
-    margin: 0;
-    padding: 0;
-    list-style: none;
 `
 
 const StatTypeColumns = styled(Columns)`
