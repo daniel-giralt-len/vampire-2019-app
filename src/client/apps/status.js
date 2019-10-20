@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import API from '../api'
 import translate from '../translate-component'
+import { CircleCounter, SquareCounter } from '../components/stat-counters'
 
 const StyledApp = styled.main`
     flex-grow: 1;
@@ -10,36 +11,12 @@ const StyledApp = styled.main`
 `
 
 const SectionTitle = styled.h2`
-    color: ${({theme}) => theme.title}
+    color: ${({ theme }) => theme.title}
     width: 100%;
-    border-bottom: 3px solid ${({theme}) => theme.title}
+    border-bottom: 3px solid ${({ theme }) => theme.title}
     text-align: center;
     padding-bottom: 3px;
     margin-bottom: 5px;
-`
-
-const Square = styled.div`
-    display: inline-block;
-    margin-right: 5px;
-    ${({ full, half, theme }) => {
-        if (full) {
-            return `background-color: ${theme.font};`
-        }
-        if (half) {
-            return `background: linear-gradient(to right, transparent 50%, ${theme.font} 50%);`
-        }
-    }}
-    ${({ size = '1em', theme }) => {
-        return `
-        width: ${size};
-        height: ${size};
-        border: 1px solid ${theme.font}
-        `
-    }}
-`
-
-const Circle = styled(Square)`
-    ${({ size = '1em' }) => `border-radius: ${size};`}
 `
 
 const Damage = ({ label, superficial, aggravated }) => {
@@ -49,7 +26,7 @@ const Damage = ({ label, superficial, aggravated }) => {
             {
                 Array(10).fill()
                     .map((_, index) => {
-                        return (<Square
+                        return (<SquareCounter
                             key={index}
                             full={index < aggravated}
                             half={index < aggravated + superficial}
@@ -74,7 +51,7 @@ const StatColumn = styled.div`
     grid-area: ${({ type }) => type};
 `
 
-const Resource = ({ label, amount, maxAmount = 10, CounterComponent = Square }) => {
+const Resource = ({ label, amount, maxAmount = 10, CounterComponent = SquareCounter }) => {
     return (
         <li>
             <div>{label}</div>
@@ -87,7 +64,7 @@ const Stat = ({ label, amount }) => (
     <Resource label={label}
         amount={amount}
         maxAmount={5}
-        CounterComponent={Circle}
+        CounterComponent={CircleCounter}
     />
 )
 
@@ -108,7 +85,7 @@ const StatsSection = translate(({ stats, t, type: sectionType }) => {
 const StatusApp = ({ t }) => {
     const [data, setData] = useState(undefined)
     useEffect(() => {
-        API.getPlayerData('Clara')
+        API.getCharacterData('Clara')
             .then(setData)
     }, [])
 
