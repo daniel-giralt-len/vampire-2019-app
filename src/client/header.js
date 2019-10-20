@@ -4,7 +4,7 @@ import Cog from './svgs/cog'
 import translate, { availableLanguages, Language } from './translate-component'
 
 const StyledHeader = styled.header`
-    background-color: ${({ theme }) => theme.blue1};
+    background-color: ${({ theme }) => theme.red1};
     color: ${({ theme }) => theme.white1};
     padding: 10px 0px;
     font-size: 2em;
@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
 `
 
 const ConfigMenu = styled.div`
-  background-color: ${({ theme }) => theme.red1};
+  background-color: ${({ theme }) => theme.blue1};
   color: ${({ theme }) => theme.white1};
   padding: 10px;
   display: flex;
@@ -26,6 +26,7 @@ const ConfigMenu = styled.div`
   right: 0;
   font-size: 2em;
   min-width: 250px;
+  box-shadow: -2px 2px 4px black;
 `
 
 const LanguageButton = styled.button`
