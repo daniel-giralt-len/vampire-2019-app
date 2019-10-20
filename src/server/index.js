@@ -3,7 +3,8 @@ import https from 'https'
 import fs from 'fs'
 import cors from 'cors'
 
-import playerData from './status-schema.json'
+import playerData from './fixtures/status-schema.json'
+import couterieData from './fixtures/couterie-schema.json'
 
 const app = express()
 app.use(cors())
@@ -19,6 +20,11 @@ app.get('/', (_, res) => res.send('Running'))
 app.get('/player/:id', (_, res) => {
   console.log('hit /player/id')
   res.json(playerData)
+})
+
+app.get('/couterie', (_, res) => {
+  console.log('hit /couterie')
+  res.json(couterieData)
 })
 
 var server = https.createServer(options, app)

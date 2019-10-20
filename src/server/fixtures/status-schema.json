@@ -1,8 +1,10 @@
 {
+    "id": 0,
     "general":{
         "name":"Klarg",
         "clan":"Brujah",
-        "generation":"14a"
+        "generation":"14a",
+        "player": "Dani"
     },
     "anxiety": 1,
     "humanity": 8,

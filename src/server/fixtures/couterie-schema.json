@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "name":"Klarg",
+    "playerName": "Dani",
+    "avatar": "./doomslayer_hurt.png",
+    "damage": {
+      "physical": {
+          "superficial": 2,
+          "aggravated": 1
+      },
+      "willpower": {
+          "superficial": 1,
+          "aggravated": 7
+      }
+    }
+  },
+  {
+    "id": 1,
+    "name":"Clara",
+    "playerName": "Fàtima",
+    "avatar": "./doomslayer_letargy.png",
+    "damage": {
+      "physical": {
+          "superficial": 0,
+          "aggravated": 10
+      },
+      "willpower": {
+          "superficial": 0,
+          "aggravated": 10
+      }
+    }
+  },
+  {
+    "id": 2,
+    "name":"Anabelle",
+    "playerName": "Joan",
+    "avatar": "./doomslayer_ok.png",
+    "damage": {
+      "physical": {
+          "superficial": 5,
+          "aggravated": 0
+      },
+      "willpower": {
+          "superficial": 1,
+          "aggravated": 0
+      }
+    }
+  }
+]
