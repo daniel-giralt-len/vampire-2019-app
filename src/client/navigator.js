@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom'
 import translate from './translate-component'
 
 const Apps = styled.ul`
+    z-index: 1;
+
     display: grid;
     grid-template-columns: repeat(${({ amount }) => amount},1fr);
     column-gap: 5px;
