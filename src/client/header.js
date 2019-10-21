@@ -32,7 +32,7 @@ const ConfigMenu = styled.div`
 const LanguageButton = styled.button`
   font-size: 1em;
   margin-right: 5px;
-  color: ${({ theme }) => theme.background};
+  color: ${({ theme }) => theme.white1};
   &:disabled{
     color: ${({ theme }) => theme.grey1};
   }
