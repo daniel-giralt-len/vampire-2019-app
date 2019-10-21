@@ -1,4 +1,10 @@
 {
+  "navigator.bonds": "Lazos",
+  "navigator.couterie": "Couterie",
+  "navigator.map": "Mapa",
+  "navigator.messenger": "Mensajes",
+  "navigator.news": "Notícias",
+  "navigator.status": "Ficha",
   "couterie.title": "Couterie",
   "header.en": "Inglés",
   "header.es": "Español",

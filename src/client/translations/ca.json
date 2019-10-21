@@ -1,4 +1,10 @@
 {
+  "navigator.bonds": "Vincles",
+  "navigator.couterie": "Couterie",
+  "navigator.map": "Mapa",
+  "navigator.messenger": "Missatges",
+  "navigator.news": "Notícies",
+  "navigator.status": "Fitxa",
   "couterie.title": "Couterie",
   "header.en": "Anglès",
   "header.es": "Espanyol",
