@@ -21,7 +21,7 @@ const SquareCounter = styled.div`
     }}
 `
 
-const CircleCounter = styled(Square)`
+const CircleCounter = styled(SquareCounter)`
     ${({ size = '1em' }) => `border-radius: ${size};`}
 `
 
