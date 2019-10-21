@@ -45,8 +45,9 @@ const AppSvg = styled.div`
 `
 
 const AppLink = ({ Svg, link, name, onClick }) => {
+    const WrapperComponent = link ? (StyledAppLink) : ('div')
     return (
-            <StyledAppLink
+            <WrapperComponent
                 onClick={onClick}
                 to={link}
             >
@@ -54,7 +55,7 @@ const AppLink = ({ Svg, link, name, onClick }) => {
                     <Svg width='100px' height='100px' />
                 </AppSvg>
                 {name}
-            </StyledAppLink>
+            </WrapperComponent>
         )
 }
 
