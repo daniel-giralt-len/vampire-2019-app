@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "Klarg",
+    "avatar": "./doomslayer_hurt.png",
+    "danger": "hurt",
+    "location": {
+      "longitude": 41.379558,
+      "latitude": 2.155921
+    }
+  },
+  {
+    "id": 1,
+    "name": "Clara",
+    "avatar": "./doomslayer_letargy.png",
+    "danger": "letargy",
+    "location": {
+      "longitude": 41.383809,
+      "latitude": 2.168774
+    }
+  },
+  {
+    "id": 2,
+    "name": "Anabelle",
+    "avatar": "./doomslayer_ok.png",
+    "danger": "ok",
+    "location": {
+      "longitude": 41.443211,
+      "latitude": 2.198208
+    }
+  }
+]

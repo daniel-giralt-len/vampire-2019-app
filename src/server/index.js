@@ -5,6 +5,7 @@ import cors from 'cors'
 
 import playerData from './fixtures/status-schema.json'
 import couterieData from './fixtures/couterie-schema.json'
+import mapsData from './fixtures/maps-schema.json'
 
 const app = express()
 app.use(cors())
@@ -25,6 +26,11 @@ app.get('/player/:id', (_, res) => {
 app.get('/couterie', (_, res) => {
   console.log('hit /couterie')
   res.json(couterieData)
+})
+
+app.get('/maps', (_, res) => {
+  console.log('hit /maps')
+  res.json(mapsData)
 })
 
 var server = https.createServer(options, app)
