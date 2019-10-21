@@ -8,7 +8,7 @@ import Header from './header'
 import styled from 'styled-components'
 import translate from './translate-component'
 
-const StyledMain = styled.div`
+const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -22,12 +22,18 @@ const NavigationFooter = styled.footer`
     text-align: center;
 `
 
+const StyledContent = styled.main`
+    flex-grow: 1;
+    overflow-y: scroll;
+    padding: 3vh 3vw 0.5vh 3vw;
+`
+
 const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
 
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     return (
-        <StyledMain>
+        <StyledLayout>
             <Header
                 onLanguageChange={onLanguageChange}
                 onThemeToggle={onThemeToggle}
@@ -40,6 +46,7 @@ const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
                     onCloseApps={toggleHasAppsOpened}
                 />
                 <Switch>
+                    <StyledContent>
                     <Route exact path='/'>/</Route>
                     <Route exact path='/map'>map</Route>
                     <Route exact path='/messenger'>messenger</Route>
@@ -47,12 +54,13 @@ const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
                     <Route exact path='/news'><News /></Route>
                     <Route exact path='/status'><Status /></Route>
                     <Route exact path='/relationships'>relationships</Route>
+                    </StyledContent>
                 </Switch>
             </Router>
             <NavigationFooter onClick={toggleHasAppsOpened}>
                 {t('main.footer.apps')}
             </NavigationFooter>
-        </StyledMain>
+        </StyledLayout>
     )
 }
 

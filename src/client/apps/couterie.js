@@ -10,13 +10,6 @@ const StyledCouterie = styled.ul`
   row-gap: 2.5vh;
 `
 
-const StyledPage = styled.main`
-  flex-grow: 1;
-  overflow-y: scroll;
-
-  padding: 3vh 3vw 0.5vh 3vw;
-`
-
 const StyledMember = styled.li`
   font-size: 1.4em;
   display: grid;
@@ -115,7 +108,7 @@ const Couterie = ({ t }) => {
       .then(setCouterie)
   }, [])
   return (
-    <StyledPage>
+    <Fragment>
         <StyledMember>
           <PhysicalDamage>{t('stats.damage.physical')}</PhysicalDamage>
           <WillpowerDamage>{t('stats.damage.willpower')}</WillpowerDamage>
@@ -123,7 +116,7 @@ const Couterie = ({ t }) => {
       <StyledCouterie amount={couterie.length}>
         {couterie.map((member, index) => (<Member key={member.id} {...member} />))}
       </StyledCouterie>
-    </StyledPage>
+    </Fragment>
   )
 }
 

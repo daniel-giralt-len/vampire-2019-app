@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import API from '../api'
 import translate from '../translate-component'
 import { CircleCounter, SquareCounter } from '../components/stat-counters'
-
-const StyledApp = styled.main`
-    flex-grow: 1;
-    overflow-y: scroll;
-    padding: 3vh 3vw 0.5vh 3vw;
-`
 
 const SectionTitle = styled.h2`
     color: ${({ theme }) => theme.title}
@@ -92,7 +86,7 @@ const StatusApp = ({ t }) => {
     if (!data) return ''
     const { general, anxiety, humanity, damage, stats } = data
     const { attributes, skills, disciplines } = stats
-    return (<StyledApp>
+    return (<Fragment>
         <Columns>
             {
                 Object.entries(general)
@@ -126,7 +120,7 @@ const StatusApp = ({ t }) => {
         <StatsSection type='attributes' stats={attributes} />
         <SectionTitle>{(t('stats.skills'))}</SectionTitle>
         <StatsSection type='skills' stats={skills} />
-    </StyledApp>)
+    </Fragment>)
 }
 
 export default translate(StatusApp)
