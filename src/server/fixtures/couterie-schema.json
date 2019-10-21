@@ -4,6 +4,7 @@
     "name":"Klarg",
     "playerName": "Dani",
     "avatar": "./doomslayer_hurt.png",
+    "danger": "hurt",
     "damage": {
       "physical": {
           "superficial": 2,
@@ -20,6 +21,7 @@
     "name":"Clara",
     "playerName": "Fàtima",
     "avatar": "./doomslayer_letargy.png",
+    "danger": "letargy",
     "damage": {
       "physical": {
           "superficial": 0,
@@ -36,6 +38,7 @@
     "name":"Anabelle",
     "playerName": "Joan",
     "avatar": "./doomslayer_ok.png",
+    "danger": "ok",
     "damage": {
       "physical": {
           "superficial": 5,

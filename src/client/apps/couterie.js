@@ -16,12 +16,14 @@ const SectionTitle = styled.h2`
 `
 
 const StyledCouterie = styled.ul`
+  margin-top: 10px;
   display: grid;
   grid-template-rows: repeat(${({ amount }) => amount}, 1fr);
-  row-gap: 2.5vh;
+  row-gap: 0.5vh;
 `
 
 const StyledMember = styled.li`
+  padding: 10px;
   font-size: 1.4em;
   display: grid;
   grid-template-columns: 0.4fr 1.3fr 0.9fr 0.9fr;
@@ -29,6 +31,14 @@ const StyledMember = styled.li`
   grid-template-areas:
     "avatar player-name physical willpower"
     "avatar character-name physical willpower";
+  background-color: ${({ danger, theme }) => {
+    if(danger === 'hurt'){
+      return theme.red1
+    }
+    if(danger === 'letargy'){
+      return theme.grey1
+    }
+  }};
 `
 
 const Avatar = styled.div`
@@ -80,14 +90,14 @@ const Damage = ({ superficial, aggravated }) => {
   )
 }
 
-const Member = translate(({
+const Member = ({
   name,
   playerName,
   avatar: avatarUrl,
   damage,
-  t
+  danger,
 }) => {
-  return (<StyledMember>
+  return (<StyledMember danger={danger}>
     <Avatar>
       <AvatarImage src={avatarUrl} />
     </Avatar>
@@ -110,7 +120,7 @@ const Member = translate(({
       />
     </WillpowerDamage>
   </StyledMember>)
-})
+}
 
 const Couterie = ({ t }) => {
   const [couterie, setCouterie] = useState([])
