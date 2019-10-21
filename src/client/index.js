@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import MainPage from './main-page'
+import App from './app'
 
-ReactDOM.render((<MainPage />), document.querySelector('#root'))
+ReactDOM.render((<App />), document.querySelector('#root'))

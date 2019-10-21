@@ -2,47 +2,11 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import News from './apps/news'
 import Status from './apps/status'
+import Couterie from './apps/couterie'
 import Navigator from './navigator'
 import Header from './header'
-import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { darkTheme, lightTheme } from './colors'
-import translate, { Language } from './translate-component'
-
-const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'Venetian 301';
-    src: url('./Venetian301BT-Roman.otf');
-  }
-  body {
-    margin: 0;
-    height: 100vh;
-    font-family: 'Venetian 301';
-    font-weight: bold;
-    font-size: 1.5em;
-    color: ${({ theme }) => theme.font};
-    background-color: ${({ theme }) => theme.background};
-  }
-  a{
-    color: inherit;
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
-  }
-  ul, li {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-  }
-  button {
-    font-family: 'Venetian 301';
-    border: none;
-    color: ${({ theme }) => theme.font};
-    background: none;    
-  }
-  #root {
-      height: 100%;
-  }
-`
+import styled from 'styled-components'
+import translate from './translate-component'
 
 const StyledMain = styled.div`
     display: flex;
@@ -58,43 +22,37 @@ const NavigationFooter = styled.footer`
     text-align: center;
 `
 
-const MainPage = ({ t }) => {
+const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
-    const [language, setLanguage] = useState('ca')
-    const [currentTheme, setCurrentTheme] = useState('light')
 
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
-    const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
     return (
-        <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
-            <GlobalStyle />
-            <Language.Provider value={language}>
-                <StyledMain>
-                    <Header
-                        onLanguageChange={setLanguage}
-                        onThemeToggle={toggleTheme}
-                        theme={currentTheme}
-                    />
-                    <Router>
-                        <Navigator
-                            hidden={!hasAppsOpened}
-                            onClick={toggleHasAppsOpened}
-                            onCloseApps={toggleHasAppsOpened}
-                        />
-                        <Switch>
-                            <Route exact path='/'>/</Route>
-                            <Route exact path='/map'>map</Route>
-                            <Route exact path='/messenger'>messenger</Route>
-                            <Route exact path='/couterie'>couterie</Route>
-                            <Route exact path='/news'><News /></Route>
-                            <Route exact path='/status'><Status /></Route>
-                            <Route exact path='/relationships'>relationships</Route>
-                        </Switch>
-                    </Router>
-                    <NavigationFooter onClick={toggleHasAppsOpened}>{t('main.footer.apps')}</NavigationFooter>
-                </StyledMain>
-            </Language.Provider>
-        </ThemeProvider>
+        <StyledMain>
+            <Header
+                onLanguageChange={onLanguageChange}
+                onThemeToggle={onThemeToggle}
+                theme={currentTheme}
+            />
+            <Router>
+                <Navigator
+                    hidden={!hasAppsOpened}
+                    onClick={toggleHasAppsOpened}
+                    onCloseApps={toggleHasAppsOpened}
+                />
+                <Switch>
+                    <Route exact path='/'>/</Route>
+                    <Route exact path='/map'>map</Route>
+                    <Route exact path='/messenger'>messenger</Route>
+                    <Route exact path='/couterie'><Couterie /></Route>
+                    <Route exact path='/news'><News /></Route>
+                    <Route exact path='/status'><Status /></Route>
+                    <Route exact path='/relationships'>relationships</Route>
+                </Switch>
+            </Router>
+            <NavigationFooter onClick={toggleHasAppsOpened}>
+                {t('main.footer.apps')}
+            </NavigationFooter>
+        </StyledMain>
     )
 }
 
