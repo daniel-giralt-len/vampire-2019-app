@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import API from '../api'
 import translate from '../translate-component'
 import { CircleCounter, SquareCounter } from '../components/stat-counters'
+import PaddedApp from '../components/app-padding'
 
 const SectionTitle = styled.h2`
     color: ${({ theme }) => theme.title}
@@ -86,7 +87,7 @@ const StatusApp = ({ t }) => {
     if (!data) return ''
     const { general, anxiety, humanity, damage, stats } = data
     const { attributes, skills, disciplines } = stats
-    return (<Fragment>
+    return (<PaddedApp>
         <Columns>
             {
                 Object.entries(general)
@@ -120,7 +121,7 @@ const StatusApp = ({ t }) => {
         <StatsSection type='attributes' stats={attributes} />
         <SectionTitle>{(t('stats.skills'))}</SectionTitle>
         <StatsSection type='skills' stats={skills} />
-    </Fragment>)
+    </PaddedApp>)
 }
 
 export default translate(StatusApp)

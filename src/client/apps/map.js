@@ -25,7 +25,7 @@ const MapApp = () => {
         })
       ],
       view: new View({
-        center: [0],
+        center: [0,0],
         zoom: 0
       })
     }))

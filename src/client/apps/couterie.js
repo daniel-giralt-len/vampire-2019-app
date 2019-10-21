@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import API from '../api'
 import translate from '../translate-component'
 import { SquareCounter } from '../components/stat-counters'
+import PaddedApp from '../components/app-padding'
 
 const SectionTitle = styled.h2`
     color: ${({ theme }) => theme.title}
@@ -129,7 +130,7 @@ const Couterie = ({ t }) => {
       .then(setCouterie)
   }, [])
   return (
-    <Fragment>
+    <PaddedApp>
         <SectionTitle>{t('couterie.title')}</SectionTitle>
         <StyledMember>
           <PhysicalDamage>{t('stats.damage.physical')}</PhysicalDamage>
@@ -138,7 +139,7 @@ const Couterie = ({ t }) => {
       <StyledCouterie amount={couterie.length}>
         {couterie.map((member, index) => (<Member key={member.id} {...member} />))}
       </StyledCouterie>
-    </Fragment>
+    </PaddedApp>
   )
 }
 

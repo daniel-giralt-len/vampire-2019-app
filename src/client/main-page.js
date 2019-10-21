@@ -26,11 +26,9 @@ const NavigationFooter = styled.footer`
 const StyledContent = styled.main`
     flex-grow: 1;
     overflow-y: scroll;
-    padding: 3vh 1vw 0.5vh 1vw;
     margin: 0 2vw 0vh 2vw;
     border-left: 2px solid ${({ theme }) => theme.title};
     border-right: 2px solid ${({ theme }) => theme.title};
-    box-sizing: border-box;
 `
 
 const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
