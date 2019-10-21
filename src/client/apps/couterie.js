@@ -4,6 +4,17 @@ import API from '../api'
 import translate from '../translate-component'
 import { SquareCounter } from '../components/stat-counters'
 
+const SectionTitle = styled.h2`
+    color: ${({ theme }) => theme.title}
+    width: 100%;
+    border-bottom: 3px solid ${({ theme }) => theme.title}
+    text-align: center;
+    padding-bottom: 3px;
+    margin-top: 0;
+    font-size: 3em;
+    margin-bottom: 20px;
+`
+
 const StyledCouterie = styled.ul`
   display: grid;
   grid-template-rows: repeat(${({ amount }) => amount}, 1fr);
@@ -109,6 +120,7 @@ const Couterie = ({ t }) => {
   }, [])
   return (
     <Fragment>
+        <SectionTitle>{t('couterie.title')}</SectionTitle>
         <StyledMember>
           <PhysicalDamage>{t('stats.damage.physical')}</PhysicalDamage>
           <WillpowerDamage>{t('stats.damage.willpower')}</WillpowerDamage>
