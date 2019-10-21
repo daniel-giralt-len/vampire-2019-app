@@ -10,6 +10,10 @@ const API = {
     getCouterieData: () => {
         return fetch(`${baseURL}/couterie`)
             .then(res => res.json())
+    },
+    getMapsData: () => {
+        return fetch(`${baseURL}/maps`)
+            .then(res => res.json())
     }
 }
 

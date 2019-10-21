@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import News from './apps/news'
+import MapApp from './apps/map'
 import Status from './apps/status'
 import Couterie from './apps/couterie'
 import Navigator from './navigator'
@@ -52,7 +53,7 @@ const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
                 <Switch>
                     <StyledContent>
                     <Route exact path='/'>/</Route>
-                    <Route exact path='/map'>map</Route>
+                    <Route exact path='/map'><MapApp /></Route>
                     <Route exact path='/messenger'>messenger</Route>
                     <Route exact path='/couterie'><Couterie /></Route>
                     <Route exact path='/news'><News /></Route>
