@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Map, View } from 'ol'
 import { fromLonLat } from 'ol/proj'
 import { Circle, Fill, Style, Stroke } from 'ol/style'
+import Icon from 'ol/style/Icon'
+import Text from 'ol/style/Text'
 import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
@@ -17,10 +19,25 @@ const MapTarget = styled.div`
 `
 
 const membersToFeatures = members => {
-  return members.map(({ location }) => {
-    return new Feature({
-      geometry: new Point(fromLonLat([location.latitude, location.longitude]))
+  return members.map(({ location, name, avatar, danger }, index) => {
+    const feature = new Feature({
+      geometry: new Point(fromLonLat([location.latitude, location.longitude])),
+      name: name,
+      description: danger
     })
+    feature.setStyle(new Style({
+      image: new Icon({
+        src: avatar,
+        scale: 5
+      }),
+      text: new Text({
+        text: name,
+        offsetY: 85,
+        scale: 10,
+        font: 'Venetian 301' //use with react https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
+      })
+    }))
+    return feature
   })
 }
 
@@ -43,17 +60,10 @@ const MapApp = () => {
   }, [])
 
   useEffect(() => {
-    /* TODO - handle multi rendering
-      2. on mapData received configure map:
-        - center map somehow
-      3. on update only rerender pins, no recentering
-    */
-    //TODO update calls to BE
     if (mapData.length === 0) return
     olMap.current.addLayer(
       new VectorLayer({
         source: new VectorSource({
-          type: 'icon',
           features: membersToFeatures(mapData)
         }),
         style: new Style({
