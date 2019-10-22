@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Map, View } from 'ol'
 import { fromLonLat } from 'ol/proj'
+import { palette } from '../colors'
 import { Circle, Fill, Style, Stroke } from 'ol/style'
 import Icon from 'ol/style/Icon'
 import Text from 'ol/style/Text'
@@ -25,16 +26,25 @@ const membersToFeatures = members => {
       name: name,
       description: danger
     })
+    let textColor = palette.black1
+    if(danger === 'hurt') {
+      textColor = palette.red1
+    }
+    if(danger === 'letargy'){
+      textColor = palette.grey1
+    }
     feature.setStyle(new Style({
       image: new Icon({
         src: avatar,
-        scale: 5
+        scale: 3,
       }),
       text: new Text({
         text: name,
         offsetY: 85,
         scale: 10,
-        font: 'Venetian 301' //use with react https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
+        fill: new Fill({ color: textColor }),
+        stroke: new Stroke({ color: palette.white1 }),
+        font: '1em "Venetian 301"' //use with react https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/font
       })
     }))
     return feature

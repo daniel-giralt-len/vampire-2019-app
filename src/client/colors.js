@@ -24,5 +24,6 @@ const darkTheme = {
 
 export {
     darkTheme,
-    lightTheme
+    lightTheme,
+    palette
 }
