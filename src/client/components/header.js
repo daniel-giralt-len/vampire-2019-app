@@ -27,6 +27,7 @@ const ConfigMenu = styled.div`
   font-size: 2em;
   min-width: 250px;
   box-shadow: -2px 2px 4px black;
+  z-index: 1;
 `
 
 const LanguageButton = styled.button`
