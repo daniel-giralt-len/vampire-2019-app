@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import MainPage from './main-page'
+import MainPage from './pages/main-page'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { darkTheme, lightTheme } from './colors'
 import { Language } from './translate-component'

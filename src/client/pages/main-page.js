@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import News from './apps/news'
-import MapApp from './apps/map'
-import Status from './apps/status'
-import Couterie from './apps/couterie'
-import Navigator from './navigator'
-import Header from './header'
+import News from '../apps/news'
+import MapApp from '../apps/map'
+import Status from '../apps/status'
+import Couterie from '../apps/couterie'
+import Navigator from '../components/navigator'
+import Header from '../components/header'
 import styled from 'styled-components'
-import translate from './translate-component'
+import translate from '../translate-component'
 
 const StyledLayout = styled.div`
     display: flex;
