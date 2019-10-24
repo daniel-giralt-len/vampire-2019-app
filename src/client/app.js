@@ -3,6 +3,7 @@ import MainPage from './pages/main-page'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { darkTheme, lightTheme } from './colors'
 import { Language } from './translate-component'
+import PasswordPage from './pages/password-page'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -41,22 +42,32 @@ const GlobalStyle = createGlobalStyle`
 `
 
 const App = () => {
-    const [language, setLanguage] = useState('ca')
-    const [currentTheme, setCurrentTheme] = useState('light')
+  const renderPage = credentialStatus => {
+    if (credentialStatus === 'none') {
+      return (<PasswordPage />)
+    }
+    if (credentialStatus === 'verified') {
+      return (<MainPage
+        onThemeToggle={toggleTheme}
+        onLanguageChange={setLanguage}
+        currentTheme={currentTheme}
+      />)
+    }
+  }
 
-    const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
-    return (
-        <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
-            <GlobalStyle />
-            <Language.Provider value={language}>
-                <MainPage
-                  onThemeToggle={toggleTheme}
-                  onLanguageChange={setLanguage}
-                  currentTheme={currentTheme}
-                />
-            </Language.Provider>
-        </ThemeProvider>
-    )
+  const [language, setLanguage] = useState('ca')
+  const [currentTheme, setCurrentTheme] = useState('light')
+  const credentials = 'none'
+
+  const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
+  return (
+    <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
+      <GlobalStyle />
+      <Language.Provider value={language}>
+        {renderPage(credentials)}
+      </Language.Provider>
+    </ThemeProvider>
+  )
 }
 
 export default App
