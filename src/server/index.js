@@ -35,9 +35,9 @@ app.get('/maps', (_, res) => {
   res.json(mapsData)
 })
 
+app.use(express.json())
 app.use(password)
 
 var server = https.createServer(options, app)
 
 server.listen(port)
- 
