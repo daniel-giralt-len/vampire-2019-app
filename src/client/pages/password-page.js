@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { palette } from '../colors'
+import API from '../api'
 
 const StyledPage = styled.div`
   display: flex;
@@ -42,11 +43,13 @@ const PasswordPage = ({ onPasswordVerification }) => {
     if(input.length < passwordLength){
       return
     }
-    /* const {verified, token} = verifyPassword(password)
-    if(verified){
-      return onPasswordVerification(token)
-    } */
-    setInput('')
+    API.verifyPassword(input)
+      .then(({verified, token, tokenTTL}) => {
+        setInput('')
+        if(verified){
+          return onPasswordVerification({token, tokenTTL})
+        }
+      })
   }, [input])
   return (<StyledPage>
     <CurrentInput>

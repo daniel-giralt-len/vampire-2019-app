@@ -20,7 +20,8 @@
   "license": "MIT",
   "nodemonConfig": {
     "ignore": [
-      "src/client/*"
+      "src/client/*",
+      "src/server/database.json"
     ]
   },
   "devDependencies": {

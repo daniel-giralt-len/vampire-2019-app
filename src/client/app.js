@@ -42,10 +42,23 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const saveToken = ({token, tokenTTL}) => {
+  console.log(token, tokenTTL)
+}
+
 const App = () => {
+  const [language, setLanguage] = useState('ca')
+  const [currentTheme, setCurrentTheme] = useState('light')
+  const [credentials, setCredentials] = useState('none')
+
   const renderPage = credentialStatus => {
     if (credentialStatus === 'none') {
-      return (<PasswordPage />)
+      return (<PasswordPage 
+        onPasswordVerification={({token, tokenTTL}) => {
+          setCredentials('verified')
+          saveToken({token, tokenTTL})
+        }}
+      />)
     }
     if (credentialStatus === 'verified') {
       return (<MainPage
@@ -55,10 +68,6 @@ const App = () => {
       />)
     }
   }
-
-  const [language, setLanguage] = useState('ca')
-  const [currentTheme, setCurrentTheme] = useState('light')
-  const credentials = 'none'
 
   const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
   return (
