@@ -7,6 +7,8 @@ import playerData from './fixtures/status-schema.json'
 import couterieData from './fixtures/couterie-schema.json'
 import mapsData from './fixtures/maps-schema.json'
 
+import password from './routes/password'
+
 const app = express()
 app.use(cors())
 const port = 3001
@@ -33,6 +35,9 @@ app.get('/maps', (_, res) => {
   res.json(mapsData)
 })
 
+app.use(password)
+
 var server = https.createServer(options, app)
 
 server.listen(port)
+ 
