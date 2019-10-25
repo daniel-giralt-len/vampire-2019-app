@@ -1,0 +1,16 @@
+{
+  "players": [
+    {
+      "id": 0,
+      "password": "ABCABCAB",
+      "token": null,
+      "tokenTTL": null
+    },
+    {
+      "id": 1,
+      "password": "EFGEFGEF",
+      "token": "aaa78c98-67e1-49b3-9cb2-b9994a61ed39",
+      "tokenTTL": 1572005991340
+    }
+  ]
+}
