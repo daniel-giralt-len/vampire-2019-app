@@ -43,6 +43,7 @@ const Toggle = styled.button`
   font-size: 1em;
   color: ${({ theme }) => theme.background};
   background-color: ${({ theme }) => theme.font};
+  padding: 2px 6px;
 `
 
 const SvgContainer = styled.div`display:flex;`

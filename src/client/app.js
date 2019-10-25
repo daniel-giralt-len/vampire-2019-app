@@ -33,8 +33,9 @@ const GlobalStyle = createGlobalStyle`
   button {
     font-family: 'Venetian 301';
     border: none;
-    color: ${({ theme }) => theme.font};
-    background: none;    
+    color: inherit;
+    background: none;
+    padding: 0
   }
   #root {
       height: 100%;
