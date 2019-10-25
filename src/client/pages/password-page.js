@@ -6,7 +6,7 @@ const StyledPage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: column;
   height: 100%;
   background: ${palette.black1};
   color: ${palette.white1};
@@ -16,28 +16,25 @@ const Keyboard = styled.main`
   display: grid;
   grid-template-columns: repeat(3, 9em);
   grid-template-rows: repeat(${({ nKeys }) => Math.ceil(nKeys / 3)}, 9em);
-  row-gap: 1vh;
-  column-gap: 1vw;
+  row-gap: 5vmin;
+  column-gap: 5vmin;
 `
 
 const Key = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9em;
-  text-align: center;
+  font-size: 6em;
   border: 1px solid ${palette.white1};
 `
 
 const CurrentInput = styled.div`
   font-size: 6em;
+  margin-bottom: 2vh;
 `
 
 const keys = 'ABCDEFJHI'.split('')
 
 const PasswordPage = ({ onPasswordVerification }) => {
   const [input, setInput] = useState('')
-  const passwordLength = 10
+  const passwordLength = 8
 
   const addKey = key => setInput(`${input}${key}`)
 
@@ -52,7 +49,9 @@ const PasswordPage = ({ onPasswordVerification }) => {
     setInput('')
   }, [input])
   return (<StyledPage>
-    <CurrentInput>{input}</CurrentInput>
+    <CurrentInput>
+      {input === '' ? '---' : input}
+    </CurrentInput>
     <Keyboard nKeys={keys.length}>
       {keys.map(key => (
         <Key
