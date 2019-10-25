@@ -42,8 +42,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const saveToken = ({token, tokenTTL}) => {
-  console.log(token, tokenTTL)
+const saveToken = ({token}) => {
+  localStorage.setItem('token', token)
 }
 
 const App = () => {
