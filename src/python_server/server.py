@@ -34,7 +34,16 @@ def couterie():
 
 @app.route('/maps', methods=['GET'])
 def maps():
-  return jsonify(db.maps.all())
+  maps = []
+  for c in db.characters.all():
+    map_data = db.maps.search(Query().id == c['id'])[0]
+    maps.append({
+      'name': c['name'],
+      'avatar': c['avatars'][c['danger']],
+      'danger': c['danger'],
+      'location': map_data['location']
+    })
+  return jsonify(maps)
 
 @app.route('/verify-password', methods=['POST'])
 def verify_password():
