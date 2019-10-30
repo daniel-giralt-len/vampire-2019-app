@@ -3,13 +3,12 @@
     {
       "id": 0,
       "password": "ABCABCAB",
-      "token": null,
-      "tokenTTL": null
+      "tokenTTL": 1572008427943,
+      "token": "9be4faeb-f4e8-4e30-ad5c-e47e659e4dbf"
     },
     {
       "id": 1,
       "password": "EFGEFGEF",
-      "token": "aaa78c98-67e1-49b3-9cb2-b9994a61ed39",
       "tokenTTL": 1572005991340
     }
   ]

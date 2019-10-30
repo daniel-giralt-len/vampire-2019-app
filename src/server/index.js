@@ -8,6 +8,7 @@ import couterieData from './fixtures/couterie-schema.json'
 import mapsData from './fixtures/maps-schema.json'
 
 import password from './routes/password'
+import token from './routes/token'
 
 const app = express()
 app.use(cors())
@@ -37,6 +38,7 @@ app.get('/maps', (_, res) => {
 
 app.use(express.json())
 app.use(password)
+app.use(token)
 
 var server = https.createServer(options, app)
 

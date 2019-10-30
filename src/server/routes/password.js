@@ -4,12 +4,12 @@ import uuid from 'uuid'
 
 const router = express.Router()
 
-let players = database.load().players || []
 
 const ttl = 604800 //1 week
 
 router.post('/verify-password', (req, res) => {
   console.log('hit /verify-password')
+  let players = database.load().players || []
   const input = req.body.password
   const playerIndex = players.findIndex(({password}) => password === input)
   if(playerIndex === -1 || players[playerIndex].token){
