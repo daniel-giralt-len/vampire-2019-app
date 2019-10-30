@@ -3,9 +3,17 @@ import fetch from 'node-fetch'
 const baseURL = 'https://localhost:5000'
 
 const API = {
-    getCharacterData: id => {
-        return fetch(`${baseURL}/player/${id}`)
-            .then(res => res.json())
+    getCharacterData: token => {
+        return fetch(
+            `${baseURL}/character`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    token: token
+                })
+            }
+        ).then(res => res.json())
     },
     getCouterieData: () => {
         return fetch(`${baseURL}/couterie`)

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import API from '../api'
 import translate from '../translate-component'
@@ -77,14 +77,14 @@ const StatsSection = translate(({ stats, t, type: sectionType }) => {
     </StatTypeColumns>)
 })
 
-const StatusApp = ({ t }) => {
-    const [data, setData] = useState(undefined)
+const StatusApp = ({ t, token }) => {
+    const [data, setData] = useState({})
     useEffect(() => {
-        API.getCharacterData('Clara')
+        API.getCharacterData(token)
             .then(setData)
     }, [])
 
-    if (!data) return ''
+    if (Object.entries(data).length === 0) return ''
     const { general, anxiety, humanity, damage, stats } = data
     const { attributes, skills, disciplines } = stats
     return (<PaddedApp>

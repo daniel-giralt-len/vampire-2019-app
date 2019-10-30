@@ -31,9 +31,14 @@ const StyledContent = styled.main`
     border-right: 2px solid ${({ theme }) => theme.title};
 `
 
-const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
+const MainPage = ({ 
+    currentTheme, 
+    onThemeToggle, 
+    onLanguageChange, 
+    t,
+    token
+}) => {
     const [hasAppsOpened, setAppsOpened] = useState(false)
-
     const toggleHasAppsOpened = () => setAppsOpened(!hasAppsOpened)
     return (
         <StyledLayout>
@@ -50,13 +55,13 @@ const MainPage = ({ currentTheme, onThemeToggle, onLanguageChange, t }) => {
                 />
                 <Switch>
                     <StyledContent>
-                    <Route exact path='/'>/</Route>
-                    <Route exact path='/map'><MapApp /></Route>
-                    <Route exact path='/messenger'>messenger</Route>
-                    <Route exact path='/couterie'><Couterie /></Route>
-                    <Route exact path='/news'><News /></Route>
-                    <Route exact path='/status'><Status /></Route>
-                    <Route exact path='/relationships'>relationships</Route>
+                        <Route exact path='/'>/</Route>
+                        <Route exact path='/map'><MapApp /></Route>
+                        <Route exact path='/messenger'>messenger</Route>
+                        <Route exact path='/couterie'><Couterie /></Route>
+                        <Route exact path='/news'><News /></Route>
+                        <Route exact path='/status'><Status token={token} /></Route>
+                        <Route exact path='/relationships'>relationships</Route>
                     </StyledContent>
                 </Switch>
             </Router>
