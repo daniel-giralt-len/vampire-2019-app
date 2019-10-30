@@ -28,8 +28,8 @@ def couterie():
   couterie = []
   for c in db.characters.all():
     couterie.append({
-      'name': c['name'],
-      'playerName': c['playerName'],
+      'name': c['general']['name'],
+      'playerName': c['general']['player'],
       'avatar': c['avatars'][c['danger']],
       'danger': c['danger'],
       'damage': c['damage'],
@@ -42,7 +42,7 @@ def maps():
   for c in db.characters.all():
     map_data = db.maps.search(Query().id == c['id'])[0]
     maps.append({
-      'name': c['name'],
+      'name': c['general']['name'],
       'avatar': c['avatars'][c['danger']],
       'danger': c['danger'],
       'location': map_data['location']
