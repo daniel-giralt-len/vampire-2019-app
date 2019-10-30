@@ -26,6 +26,18 @@ const API = {
                 })
             }
         ).then(res => res.json())
+    },
+    verifyToken: token => {
+        return fetch(
+            `${baseURL}/verify-token`,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    token: token
+                })
+            }
+        ).then(res => res.json())
     }
 }
 

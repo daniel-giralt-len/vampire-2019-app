@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainPage from './pages/main-page'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { darkTheme, lightTheme } from './colors'
 import { Language } from './translate-component'
 import PasswordPage from './pages/password-page'
+import API from './api'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -42,14 +43,26 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const saveToken = ({token}) => {
-  localStorage.setItem('token', token)
-}
+const saveToken = ({token}) => localStorage.setItem('token', token)
+const getToken = () => localStorage.getItem('token')
+const removeToken = () => localStorage.removeItem('token')
 
 const App = () => {
   const [language, setLanguage] = useState('ca')
   const [currentTheme, setCurrentTheme] = useState('light')
-  const [credentials, setCredentials] = useState('none')
+  const [credentials, setCredentials] = useState('checking')
+
+  useEffect(() => {
+    API.verifyToken(getToken)
+      .then(({isValid}) => {
+        if(isValid){  
+          setCredentials('verified')
+        }else{
+          removeToken()
+          setCredentials('none')
+        }
+      })
+  },[])
 
   const renderPage = credentialStatus => {
     if (credentialStatus === 'none') {
@@ -66,6 +79,9 @@ const App = () => {
         onLanguageChange={setLanguage}
         currentTheme={currentTheme}
       />)
+    }
+    if(credentialStatus === 'checking'){
+      return 'checking...'
     }
   }
 
