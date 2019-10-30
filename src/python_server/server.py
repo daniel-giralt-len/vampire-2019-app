@@ -18,8 +18,8 @@ def hello_world():
 def character():
   try:
     token = request.json['token']
-    p = db.players.search(Query().token == token)[0]
-    return db.characters.search(Query().id == p['id'])[0]
+    p = db.players.get(Query().token == token)
+    return db.characters.get(Query().id == p['id'])
   except (IndexError, TypeError, KeyError):
     return {}
 
@@ -40,7 +40,7 @@ def couterie():
 def maps():
   maps = []
   for c in db.characters.all():
-    map_data = db.maps.search(Query().id == c['id'])[0]
+    map_data = db.maps.get(Query().id == c['id'])
     maps.append({
       'name': c['general']['name'],
       'avatar': c['avatars'][c['danger']],
@@ -53,14 +53,14 @@ def maps():
 def verify_password():
   Player = Query()
   password = request.json['password']
-  players = db.players.search(Player.password == password)
-  if len(players) == 0:
+  player = db.players.get(Player.password == password)
+  if not player:
     return { "verified": False }
   token = str(uuid1())
   db.players.update({
     "token": token,
     "token_timestamp": time()
-  }, Player.password == password)
+  }, Player.id == player['id'])
   return {
     "verified": True,
     "token": token,
@@ -72,14 +72,13 @@ def verify_token():
   if not 'token' in request.json:
     return { "verified": False }
   token = request.json['token']
-  players = db.players.search(Player.token == token)
-  if len(players) == 0:
+  player = db.players.get(Player.token == token)
+  if not player:
     return { "verified": False }
-  player = players[0]
   time_passed = time() - player['token_timestamp']
   if time_passed > token_ttl:
-    db.players.update(delete('token_timestamp'), Player.token == token)
-    db.players.update(delete('token'), Player.token == token)
+    db.players.update(delete('token_timestamp'), Player.id == player['id'])
+    db.players.update(delete('token'), Player.id == player['id'])
     return { "verified": False }
   return { "verified": True }
 
