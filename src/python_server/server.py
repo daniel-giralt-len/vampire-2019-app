@@ -54,7 +54,7 @@ def verify_password():
   players = db.players.search(Player.password == password)
   if len(players) == 0 or 'token' in players[0]:
     return { "verified": False }
-  token = uuid1().int
+  token = str(uuid1())
   db.players.update({
     "token": token,
     "token_timestamp": time()
@@ -67,6 +67,8 @@ def verify_password():
 @app.route('/verify-token', methods=['POST'])
 def verify_token():
   Player = Query()
+  if not 'token' in request.json:
+    return { "verified": False }
   token = request.json['token']
   players = db.players.search(Player.token == token)
   if len(players) == 0:
