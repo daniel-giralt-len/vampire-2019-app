@@ -1,3 +1,4 @@
 node_modules
 .yarn-error.log
-src/server/database.json
+src/python_server/database.json
+__pycache__
