@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-const baseURL = 'https://localhost:3001'
+const baseURL = 'https://localhost:5000'
 
 const API = {
     getCharacterData: id => {

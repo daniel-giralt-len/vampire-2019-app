@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from tinydb import Query
 from tinydb.operations import delete
 from uuid import uuid1
@@ -6,6 +7,7 @@ from time import time, ctime
 import db
 
 app = Flask(__name__)
+CORS(app)
 token_ttl = 100
 
 @app.route('/')
