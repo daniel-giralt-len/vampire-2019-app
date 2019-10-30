@@ -48,33 +48,31 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const saveToken = ({token}) => localStorage.setItem('token', token)
-const getToken = () => localStorage.getItem('token')
-const removeToken = () => localStorage.removeItem('token')
-
 const App = () => {
   const [language, setLanguage] = useState('ca')
   const [currentTheme, setCurrentTheme] = useState('light')
   const [credentials, setCredentials] = useState('checking')
+  const [token, setToken] = useState(getToken())
 
   useEffect(() => {
-    API.verifyToken(getToken())
-      .then(({verified}) => {
-        if(verified){  
+    API.verifyToken(token)
+      .then(({ verified }) => {
+        if (verified) {
           setCredentials('verified')
-        }else{
+        } else {
           removeToken()
           setCredentials('none')
         }
       })
-  },[])
+  }, [])
 
-  const renderPage = credentialStatus => {
+  const renderPage = (credentialStatus) => {
     if (credentialStatus === 'none') {
-      return (<PasswordPage 
-        onPasswordVerification={({token, tokenTTL}) => {
+      return (<PasswordPage
+        onPasswordVerification={({ token }) => {
           setCredentials('verified')
-          saveToken({token, tokenTTL})
+          setToken(token)
+          saveToken(token)
         }}
       />)
     }
@@ -83,9 +81,10 @@ const App = () => {
         onThemeToggle={toggleTheme}
         onLanguageChange={setLanguage}
         currentTheme={currentTheme}
+        token={token}
       />)
     }
-    if(credentialStatus === 'checking'){
+    if (credentialStatus === 'checking') {
       return 'checking...'
     }
   }
