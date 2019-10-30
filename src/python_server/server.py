@@ -21,7 +21,16 @@ def character(id):
 
 @app.route('/couterie', methods=['GET'])
 def couterie():
-  return jsonify(db.couterie.all())
+  couterie = []
+  for c in db.characters.all():
+    couterie.append({
+      'name': c['name'],
+      'playerName': c['playerName'],
+      'avatar': c['avatars'][c['danger']],
+      'danger': c['danger'],
+      'damage': c['damage'],
+    })
+  return jsonify(couterie)
 
 @app.route('/maps', methods=['GET'])
 def maps():
