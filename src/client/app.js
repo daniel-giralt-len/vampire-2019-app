@@ -5,6 +5,11 @@ import { darkTheme, lightTheme } from './colors'
 import { Language } from './translate-component'
 import PasswordPage from './pages/password-page'
 import API from './api'
+import {
+  saveToken,
+  getToken,
+  removeToken,
+} from './token'
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
