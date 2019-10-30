@@ -52,7 +52,7 @@ def verify_password():
   Player = Query()
   password = request.json['password']
   players = db.players.search(Player.password == password)
-  if len(players) == 0 or 'token' in players[0]:
+  if len(players) == 0:
     return { "verified": False }
   token = str(uuid1())
   db.players.update({
