@@ -53,9 +53,9 @@ const App = () => {
   const [credentials, setCredentials] = useState('checking')
 
   useEffect(() => {
-    API.verifyToken(getToken)
-      .then(({isValid}) => {
-        if(isValid){  
+    API.verifyToken(getToken())
+      .then(({verified}) => {
+        if(verified){  
           setCredentials('verified')
         }else{
           removeToken()
