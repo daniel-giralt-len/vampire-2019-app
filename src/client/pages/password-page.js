@@ -31,7 +31,7 @@ const CurrentInput = styled.div`
   margin-bottom: 2vh;
 `
 
-const keys = 'ABCDEFJHI'.split('')
+const keys = 'ABCDEFGHI'.split('')
 
 const PasswordPage = ({ onPasswordVerification }) => {
   const [input, setInput] = useState('')
