@@ -4,16 +4,8 @@ const baseURL = 'https://localhost:5000'
 
 const API = {
     getCharacterData: token => {
-        return fetch(
-            `${baseURL}/character`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    token: token
-                })
-            }
-        ).then(res => res.json())
+        return fetch(`${baseURL}/character?token=${token}`)
+            .then(res => res.json())
     },
     getCouterieData: () => {
         return fetch(`${baseURL}/couterie`)

@@ -3,7 +3,7 @@ from flask_cors import CORS
 from tinydb import Query
 from tinydb.operations import delete
 from uuid import uuid1
-from time import time, ctime
+from time import time
 import db
 
 app = Flask(__name__)
@@ -14,10 +14,10 @@ token_ttl = 100000
 def hello_world():
   return 'Healthy'
 
-@app.route('/character', methods=['POST'])
+@app.route('/character', methods=['GET'])
 def character():
   try:
-    token = request.json['token']
+    token = request.args.get('token')
     p = db.players.get(Query().token == token)
     return db.characters.get(Query().id == p['id'])
   except (IndexError, TypeError, KeyError):
