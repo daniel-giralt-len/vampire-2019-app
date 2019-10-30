@@ -8,17 +8,19 @@ import db
 
 app = Flask(__name__)
 CORS(app)
-token_ttl = 100
+token_ttl = 100000
 
 @app.route('/')
 def hello_world():
   return 'Healthy'
 
-@app.route('/character/<int:id>', methods=['GET'])
-def character(id):
+@app.route('/character', methods=['POST'])
+def character():
   try:
-    return db.characters.search(Query().id == id)[0]
-  except IndexError:
+    token = request.json['token']
+    p = db.players.search(Query().token == token)[0]
+    return db.characters.search(Query().id == p['id'])[0]
+  except (IndexError, TypeError, KeyError):
     return {}
 
 @app.route('/couterie', methods=['GET'])
