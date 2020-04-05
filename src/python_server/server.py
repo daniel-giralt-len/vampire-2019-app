@@ -49,6 +49,25 @@ def maps():
     })
   return jsonify(maps)
 
+@app.route('/theme', methods=['GET'])
+def get_theme():
+  try:
+    token = request.args.get('token')
+    player = db.players.get(Query().token == token)
+    return jsonify({'theme': player['theme']})
+  except (IndexError, TypeError, KeyError):
+    return {}
+
+@app.route('/theme', methods=['POST'])
+def update_theme():
+  try:
+    db.players.update({
+      "theme": request.json['theme'],
+    }, Query().token == request.json['token'])
+    return { }
+  except (IndexError, TypeError, KeyError):
+    return { }
+
 @app.route('/verify-password', methods=['POST'])
 def verify_password():
   Player = Query()

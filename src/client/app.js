@@ -59,6 +59,8 @@ const App = () => {
       .then(({ verified }) => {
         if (verified) {
           setCredentials('verified')
+          API.getTheme(token)
+            .then(({theme}) => setCurrentTheme(theme || 'light'))
         } else {
           removeToken()
           setCredentials('none')
@@ -89,7 +91,12 @@ const App = () => {
     }
   }
 
-  const toggleTheme = () => setCurrentTheme(currentTheme === 'light' ? 'dark' : 'light')
+  const toggleTheme = () => {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+    setCurrentTheme(newTheme)
+    API.setTheme({token, theme: newTheme})
+  }
+
   return (
     <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyle />
