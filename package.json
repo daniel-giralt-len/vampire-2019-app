@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "client:dev": "webpack-dev-server --port 3000 --host 0.0.0.0",
-    "server:dev": "nodemon src/server/index.js --exec babel-node --presets @babel/preset-env",
+    "server:dev": "cd ./src/python_server && ./server.py",
     "build": "webpack --mode production"
   },
   "lint-staged": {
