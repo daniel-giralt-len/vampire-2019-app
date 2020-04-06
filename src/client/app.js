@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
   }
   button {
     font-family: 'Venetian 301';
+    font-size: inherit;
+    font-weight: inherit;
     border: none;
     color: inherit;
     background: none;

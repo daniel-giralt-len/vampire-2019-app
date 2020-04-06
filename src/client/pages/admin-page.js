@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import translate from '../translate-component'
 import API from '../api'
+
+const CenteringWrapper = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+`
 
 const AdminPage = ({t}) => {
   const [isPasswordSet, setIsPasswordSet] = useState(null)
@@ -29,17 +38,19 @@ const AdminPage = ({t}) => {
     API.setAdminPassword(passwordSet)
   }
 
-  return (<div>
+  return (<CenteringWrapper>
     <p>{t('admin.password.set.instruction')}</p>
     <input type={'text'} 
        name='password' 
        id='password'
        onChange={event => onPasswordChange(event.target.value)}
     />
-    <button onClick={setAdminPassword}>
-      {t('admin.password.set.button')}
-    </button>
-  </div>)
+    <p>
+      <button onClick={setAdminPassword}>
+        {t('admin.password.set.button')}
+      </button>
+    </p>
+  </CenteringWrapper>)
 
 }
 
