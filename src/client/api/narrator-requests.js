@@ -3,7 +3,10 @@ import fetch from 'node-fetch'
 import baseURL from './url'
 
 const narratorRequests = {
-  isAdminPasswordSet: () => Promise.resolve(false)
+  isAdminPasswordSet: () => {
+    return fetch(`${baseURL}/admin-password-set`)
+        .then(res => res.json())
+  },
 }
 
 export default narratorRequests

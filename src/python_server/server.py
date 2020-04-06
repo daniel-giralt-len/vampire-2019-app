@@ -68,6 +68,8 @@ def update_theme():
   except (IndexError, TypeError, KeyError):
     return { }
 
+# Player requests
+
 @app.route('/verify-password', methods=['POST'])
 def verify_password():
   Player = Query()
@@ -100,6 +102,18 @@ def verify_token():
     db.players.update(delete('token'), Player.id == player['id'])
     return { "verified": False }
   return { "verified": True }
+
+# Narrator requests
+
+def ensure_narrator_init():
+  if len(db.narrator)==0:
+    db.narrator.insert({})
+
+@app.route('/admin-password-set', methods=['GET'])
+def is_admin_password_set():
+  ensure_narrator_init()
+  has_password = len(db.narrator.search(Query().password.exists())) > 0
+  return { 'isPasswordSet': has_password }
 
 if __name__ == '__main__':
     app.run(ssl_context='adhoc')
