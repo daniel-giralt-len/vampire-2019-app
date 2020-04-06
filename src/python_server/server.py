@@ -124,5 +124,14 @@ def set_admin_password():
   }, ~ Query().password.exists())
   return { }
 
+@app.route('/admin/password', methods=['POST'])
+def is_admin_password_valid():
+  try:
+    password = request.json['password']
+    is_password_valid = len(db.narrator.get(Query().password == password)) > 0
+    return { 'isPasswordValid': is_password_valid }
+  except (IndexError, TypeError, KeyError):
+    return { 'isPasswordValid': False }
+
 if __name__ == '__main__':
     app.run(ssl_context='adhoc')

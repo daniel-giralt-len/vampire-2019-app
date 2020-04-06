@@ -13,7 +13,8 @@ const CenteringWrapper = styled.main`
 
 const AdminPage = ({t}) => {
   const [isPasswordSet, setIsPasswordSet] = useState(null)
-  const [passwordSet, setPasswordSet] = useState('')
+  const [isPasswordValid, setIsPasswordValid] = useState(null)
+  const [passwordInput, setPasswordInput] = useState('')
 
   useEffect(() => {
     API.isAdminPasswordSet()
@@ -22,25 +23,46 @@ const AdminPage = ({t}) => {
       })
   }, [])
 
+  if(isPasswordValid === true){
+    return 'this is the panel'
+  }
+
   if(isPasswordSet === null){
     return 'loading...'
   }
 
-  if(isPasswordSet === true){
-    return 'please enter your password'
+  const onPasswordChange = (value) => {
+    setPasswordInput(value)
   }
 
-  const onPasswordChange = (value) => {
-    setPasswordSet(value)
+  if(isPasswordSet === true){
+    const checkAdminPassword = () => {
+      API.checkAdminPassword(passwordInput)
+        .then(({isPasswordValid}) => setIsPasswordValid(isPasswordValid))
+    }
+
+    return (<CenteringWrapper>
+      <p>{t('admin.password.input.instruction')}</p>
+      <input type='text'
+         name='password' 
+         id='password'
+         onChange={event => onPasswordChange(event.target.value)}
+      />
+      <p>
+        <button onClick={checkAdminPassword}>
+          {t('admin.password.input.button')}
+        </button>
+      </p>
+    </CenteringWrapper>)
   }
 
   const setAdminPassword = () => {
-    API.setAdminPassword(passwordSet)
+    API.setAdminPassword(passwordInput)
   }
 
   return (<CenteringWrapper>
     <p>{t('admin.password.set.instruction')}</p>
-    <input type={'text'} 
+    <input type='text'
        name='password' 
        id='password'
        onChange={event => onPasswordChange(event.target.value)}

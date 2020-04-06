@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
       margin: 0;
   }
-  button {
+  button, input {
     font-family: 'Venetian 301';
     font-size: inherit;
     font-weight: inherit;
@@ -46,6 +46,9 @@ const GlobalStyle = createGlobalStyle`
     color: inherit;
     background: none;
     padding: 0
+  }
+  input {
+    border: 2px solid ${({ theme }) => theme.font};
   }
   #root {
       height: 100%;
