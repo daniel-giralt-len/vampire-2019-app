@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import MainPage from './pages/main-page'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { darkTheme, lightTheme } from './colors'
 import { Language } from './translate-component'
+import AdminPage from './pages/admin-page'
+import MainPage from './pages/main-page'
 import PasswordPage from './pages/password-page'
 import API from './api'
 import {
@@ -68,7 +70,7 @@ const App = () => {
       })
   }, [])
 
-  const renderPage = (credentialStatus) => {
+  const renderPlayerPage = (credentialStatus) => {
     if (credentialStatus === 'none') {
       return (<PasswordPage
         onPasswordVerification={({ token }) => {
@@ -101,7 +103,12 @@ const App = () => {
     <ThemeProvider theme={currentTheme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyle />
       <Language.Provider value={language}>
-        {renderPage(credentials)}
+      <Router>
+        <Switch>
+          <Route exact path='/admin'><AdminPage/></Route>
+          <Route path='/'>{renderPlayerPage(credentials)}</Route>
+        </Switch>
+      </Router>
       </Language.Provider>
     </ThemeProvider>
   )
