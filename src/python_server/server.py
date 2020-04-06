@@ -115,5 +115,14 @@ def is_admin_password_set():
   has_password = len(db.narrator.search(Query().password.exists())) > 0
   return { 'isPasswordSet': has_password }
 
+@app.route('/admin-password-set', methods=['POST'])
+def set_admin_password():
+  ensure_narrator_init()
+  password = request.json['password']
+  db.narrator.update({
+    "password": password,
+  }, ~ Query().password.exists())
+  return { }
+
 if __name__ == '__main__':
     app.run(ssl_context='adhoc')

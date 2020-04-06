@@ -61,5 +61,7 @@
   "stats.skills.medicine": "Medicine",
   "stats.skills.occult": "Occult",
   "stats.skills.politics": "Politics",
-  "stats.skills.technology": "Technology"
+  "stats.skills.technology": "Technology",
+  "admin.password.set.instruction": "Hello, narrator. Since this is your first time, please set your password. Do not share it with any of your players.",
+  "admin.password.set.button": "Set"
 }

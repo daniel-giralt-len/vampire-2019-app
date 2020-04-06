@@ -61,5 +61,7 @@
   "stats.skills.medicine": "Medicina",
   "stats.skills.occult": "Ocultisme",
   "stats.skills.politics": "Política",
-  "stats.skills.technology": "Tecnología"
+  "stats.skills.technology": "Tecnología",
+  "admin.password.set.instruction": "Benvingut, Narrador. Com és son primer cop, creï una contrassenya. No la mostri a cap dels seus jugadors.",
+  "admin.password.set.button": "Crear"
 }

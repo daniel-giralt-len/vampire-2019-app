@@ -61,5 +61,7 @@
   "stats.skills.medicine": "Medicina",
   "stats.skills.occult": "Ocultismo",
   "stats.skills.politics": "Política",
-  "stats.skills.technology": "Tecnología"
+  "stats.skills.technology": "Tecnología",
+  "admin.password.set.instruction": "Bienvenidor, Narrador. Como es su primera vez, cree una contraseña. No la muestre a ninguno de sus jugadores.",
+  "admin.password.set.button": "Crear"
 }

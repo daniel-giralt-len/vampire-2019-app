@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import translate from '../translate-component'
 import API from '../api'
-import PasswordSetter from '../components/password-setter'
 
-const AdminPage = () => {
+const AdminPage = ({t}) => {
   const [isPasswordSet, setIsPasswordSet] = useState(null)
-  
+  const [passwordSet, setPasswordSet] = useState('')
+
   useEffect(() => {
     API.isAdminPasswordSet()
       .then(({ isPasswordSet }) => {
@@ -21,7 +21,25 @@ const AdminPage = () => {
     return 'please enter your password'
   }
 
-  return (<PasswordSetter />)
+  const onPasswordChange = (value) => {
+    setPasswordSet(value)
+  }
+
+  const setAdminPassword = () => {
+    API.setAdminPassword(passwordSet)
+  }
+
+  return (<div>
+    <p>{t('admin.password.set.instruction')}</p>
+    <input type={'text'} 
+       name='password' 
+       id='password'
+       onChange={event => onPasswordChange(event.target.value)}
+    />
+    <button onClick={setAdminPassword}>
+      {t('admin.password.set.button')}
+    </button>
+  </div>)
 
 }
 
