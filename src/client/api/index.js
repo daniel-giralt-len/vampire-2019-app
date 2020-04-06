@@ -1,6 +1,8 @@
 import fetch from 'node-fetch'
 
-const baseURL = 'https://localhost:5000'
+import baseURL from './url'
+import playerRequests from './player-requests'
+import narratorRequests from './narrator-requests'
 
 const API = {
     getCharacterData: token => {
@@ -28,30 +30,8 @@ const API = {
             })
             .then(res => res.json())
     },
-    verifyPassword: password => {
-        return fetch(
-            `${baseURL}/verify-password`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    password: password
-                })
-            }
-        ).then(res => res.json())
-    },
-    verifyToken: token => {
-        return fetch(
-            `${baseURL}/verify-token`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    token: token
-                })
-            }
-        ).then(res => res.json())
-    }
+    ...playerRequests,
+    ...narratorRequests,
 }
 
 export default API
