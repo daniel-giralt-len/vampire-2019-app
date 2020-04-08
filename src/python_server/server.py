@@ -107,7 +107,7 @@ def verify_token():
 
 def ensure_narrator_init():
   if len(db.narrator)==0:
-    db.narrator.insert({})
+    db.narrator.insert({"id":0})
 
 @app.route('/admin-password-set', methods=['GET'])
 def is_admin_password_set():
@@ -124,12 +124,36 @@ def set_admin_password():
   }, ~ Query().password.exists())
   return { }
 
+@app.route('/admin/verify-token', methods=['POST'])
+def verify_admin_token():
+  Narrator = Query()
+  if not 'token' in request.json:
+    return { "verified": False }
+  token = request.json['token']
+  narrator = db.narrator.get(Narrator.token == token)
+  if not narrator:
+    return { "verified": False }
+  time_passed = time() - narrator['token_timestamp']
+  if time_passed > token_ttl:
+    db.narrator.update(delete('token_timestamp'), Narrator.id == narrator['id'])
+    db.narrator.update(delete('token'), Narrator.id == narrator['id'])
+    return { "verified": False }
+  return { "verified": True }
+
+
 @app.route('/admin/password', methods=['POST'])
 def is_admin_password_valid():
   try:
     password = request.json['password']
     is_password_valid = len(db.narrator.get(Query().password == password)) > 0
-    return { 'isPasswordValid': is_password_valid }
+    if is_password_valid:
+      token = str(uuid1())
+      db.narrator.update({
+        'token': token,
+        'token_timestamp': time()
+      }, Query().password == password)
+      return { 'isPasswordValid': True,'token': token }
+    return { 'isPasswordValid': False }
   except (IndexError, TypeError, KeyError):
     return { 'isPasswordValid': False }
 

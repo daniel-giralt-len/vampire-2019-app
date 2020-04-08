@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import translate from '../translate-component'
 import API from '../api'
+import AdminPanel from '../components/admin-panel'
+import {
+  saveToken,
+  getToken,
+  removeToken,
+} from '../token'
 
 const CenteringWrapper = styled.main`
   display: flex;
@@ -16,16 +22,27 @@ const AdminPage = ({t}) => {
   const [isPasswordValid, setIsPasswordValid] = useState(null)
   const [passwordInput, setPasswordInput] = useState('')
   const [isSettingPasword, setIsSettingPasword] = useState(false)
+  const [token, setToken] = useState(getToken())
 
   const evaluatePasswordSet = () => API.isAdminPasswordSet()
-    .then(({ isPasswordSet }) => setIsPasswordSet(isPasswordSet))
+    .then(({ isPasswordSet }) => {
+      setIsPasswordSet(isPasswordSet)
+      return isPasswordSet
+    })
 
   useEffect(() => {
     evaluatePasswordSet()
+      .then(isPasswordSet => isPasswordSet && API.verifyAdminToken(token))
+      .then(({ verified }) => {
+        setIsPasswordValid(verified)
+        if(!verified){
+          removeToken()
+        }
+      })
   }, [])
 
   if(isPasswordValid === true){
-    return 'this is the panel'
+    return (<AdminPanel />)
   }
 
   if(isPasswordSet === null){
@@ -39,7 +56,11 @@ const AdminPage = ({t}) => {
   if(isPasswordSet === true){
     const checkAdminPassword = () => 
       API.checkAdminPassword(passwordInput)
-        .then(({isPasswordValid}) => setIsPasswordValid(isPasswordValid))    
+        .then(({isPasswordValid, token}) => {
+          setIsPasswordValid(isPasswordValid)
+          setToken(token)
+          saveToken(token)
+        })    
 
     const onPasswordKeyDown = (e) => {
       if(e.key === 'Enter'){

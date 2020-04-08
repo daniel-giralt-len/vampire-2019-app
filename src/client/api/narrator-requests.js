@@ -26,6 +26,18 @@ const narratorRequests = {
         }
     ).then(res => res.json())
   },
+  verifyAdminToken: token => {
+    return fetch(
+        `${baseURL}/admin/verify-token`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                token: token
+            })
+        }
+    ).then(res => res.json())
+  }
 }
 
 export default narratorRequests
