@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import translate from '../translate-component'
 import API from '../api'
-import AdminPanel from '../components/admin-panel'
+import AdminPanel from '../admin-components/admin-panel'
 import {
   saveToken,
   getToken,
