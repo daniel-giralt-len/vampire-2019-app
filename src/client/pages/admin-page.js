@@ -15,12 +15,13 @@ const AdminPage = ({t}) => {
   const [isPasswordSet, setIsPasswordSet] = useState(null)
   const [isPasswordValid, setIsPasswordValid] = useState(null)
   const [passwordInput, setPasswordInput] = useState('')
+  const [isSettingPasword, setIsSettingPasword] = useState(false)
+
+  const evaluatePasswordSet = () => API.isAdminPasswordSet()
+    .then(({ isPasswordSet }) => setIsPasswordSet(isPasswordSet))
 
   useEffect(() => {
-    API.isAdminPasswordSet()
-      .then(({ isPasswordSet }) => {
-        setIsPasswordSet(isPasswordSet)
-      })
+    evaluatePasswordSet()
   }, [])
 
   if(isPasswordValid === true){
@@ -36,9 +37,15 @@ const AdminPage = ({t}) => {
   }
 
   if(isPasswordSet === true){
-    const checkAdminPassword = () => {
+    const checkAdminPassword = () => 
       API.checkAdminPassword(passwordInput)
-        .then(({isPasswordValid}) => setIsPasswordValid(isPasswordValid))
+        .then(({isPasswordValid}) => setIsPasswordValid(isPasswordValid))    
+
+    const onPasswordKeyDown = (e) => {
+      if(e.key === 'Enter'){
+        e.preventDefault()
+        checkAdminPassword()
+      }
     }
 
     return (<CenteringWrapper>
@@ -47,6 +54,7 @@ const AdminPage = ({t}) => {
          name='password' 
          id='password'
          onChange={event => onPasswordChange(event.target.value)}
+         onKeyDown={onPasswordKeyDown}
       />
       <p>
         <button onClick={checkAdminPassword}>
@@ -56,8 +64,16 @@ const AdminPage = ({t}) => {
     </CenteringWrapper>)
   }
 
-  const setAdminPassword = () => {
-    API.setAdminPassword(passwordInput)
+  const setAdminPassword = () => Promise.resolve(setIsSettingPasword(true))
+    .then(() => API.setAdminPassword(passwordInput))
+    .then(evaluatePasswordSet)
+  
+
+  const onPasswordKeyDown = (e) => {
+    if(e.key === 'Enter'){
+      e.preventDefault()
+      setAdminPassword()
+    }
   }
 
   return (<CenteringWrapper>
@@ -66,12 +82,14 @@ const AdminPage = ({t}) => {
        name='password' 
        id='password'
        onChange={event => onPasswordChange(event.target.value)}
+       onKeyDown={onPasswordKeyDown}
     />
     <p>
       <button onClick={setAdminPassword}>
         {t('admin.password.set.button')}
       </button>
     </p>
+    {isSettingPasword && (<p>{t('admin.password.input.refresh')}</p>)}
   </CenteringWrapper>)
 
 }
