@@ -64,6 +64,7 @@
   "stats.skills.technology": "Technology",
   "admin.password.set.instruction": "Well met, Narrator. Since this is your first time, please set your password. Do not share it with any of your players.",
   "admin.password.set.button": "Set",
+  "admin.password.set.refresh": "Setting password...",
   "admin.password.input.instruction": "Well met, Narrator. Input the password.",
   "admin.password.input.button": "Enter"
 }

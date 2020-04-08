@@ -64,6 +64,7 @@
   "stats.skills.technology": "Tecnología",
   "admin.password.set.instruction": "Bienvenido, Narrador. Como es su primera vez, cree una contraseña. No la muestre a ninguno de sus jugadores.",
   "admin.password.set.button": "Crear",
+  "admin.password.set.refresh": "Creando contraseña...",
   "admin.password.input.instruction": "Bienvenido, Narrador. Introduzca la contraseña.",
   "admin.password.input.button": "Entrar"
 }

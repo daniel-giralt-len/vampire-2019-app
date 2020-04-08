@@ -64,6 +64,7 @@
   "stats.skills.technology": "Tecnología",
   "admin.password.set.instruction": "Benvingut, Narrador. Com és son primer cop, creï una contrassenya. No la mostri a cap dels seus jugadors.",
   "admin.password.set.button": "Crear",
+  "admin.password.set.refresh": "Creant contrassenya...",
   "admin.password.input.instruction": "Benvingut, Narrador. Introdueixi la contrassenya.",
   "admin.password.input.button": "Entrar"
 }

@@ -110,7 +110,7 @@ const AdminPage = ({t}) => {
         {t('admin.password.set.button')}
       </button>
     </p>
-    {isSettingPasword && (<p>{t('admin.password.input.refresh')}</p>)}
+    {isSettingPasword && (<p>{t('admin.password.set.refresh')}</p>)}
   </CenteringWrapper>)
 
 }
