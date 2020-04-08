@@ -110,7 +110,7 @@ const App = () => {
       <Language.Provider value={language}>
       <Router>
         <Switch>
-          <Route exact path='/admin'><AdminPage/></Route>
+          <Route exact path='/narrator'><AdminPage/></Route>
           <Route path='/'>{renderPlayerPage(credentials)}</Route>
         </Switch>
       </Router>
