@@ -22,7 +22,7 @@ const AdminPage = ({t}) => {
   const [isPasswordValid, setIsPasswordValid] = useState(null)
   const [passwordInput, setPasswordInput] = useState('')
   const [isSettingPasword, setIsSettingPasword] = useState(false)
-  const [token, setToken] = useState(getToken())
+  const [token, setToken] = useState(getToken('admin-token'))
 
   const evaluatePasswordSet = () => API.isAdminPasswordSet()
     .then(({ isPasswordSet }) => {
@@ -31,14 +31,16 @@ const AdminPage = ({t}) => {
     })
 
   useEffect(() => {
-    evaluatePasswordSet()
-      .then(isPasswordSet => isPasswordSet && API.verifyAdminToken(token))
+    API.verifyAdminToken(token)
       .then(({ verified }) => {
-        setIsPasswordValid(verified)
-        if(!verified){
-          removeToken()
+        if(verified){
+          setIsPasswordValid(true)
+          setIsPasswordSet(true)
+          return
         }
+        removeToken('admin-token')
       })
+      .then(evaluatePasswordSet)
   }, [])
 
   if(isPasswordValid === true){
@@ -59,7 +61,7 @@ const AdminPage = ({t}) => {
         .then(({isPasswordValid, token}) => {
           setIsPasswordValid(isPasswordValid)
           setToken(token)
-          saveToken(token)
+          saveToken(token, 'admin-token')
         })    
 
     const onPasswordKeyDown = (e) => {
