@@ -2,13 +2,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from tinydb import Query
 from tinydb.operations import delete
-from uuid import uuid1
-from time import time
 import db
+import token_operations
 
 app = Flask(__name__)
 CORS(app)
-token_ttl = 100000
 
 @app.route('/')
 def hello_world():
@@ -77,11 +75,7 @@ def verify_password():
   player = db.players.get(Player.password == password)
   if not player:
     return { "verified": False }
-  token = str(uuid1())
-  db.players.update({
-    "token": token,
-    "token_timestamp": time()
-  }, Player.id == player['id'])
+  token = token_operations.add_token_data_to_instance(player['id'], 'players')
   return {
     "verified": True,
     "token": token,
@@ -89,19 +83,7 @@ def verify_password():
 
 @app.route('/verify-token', methods=['POST'])
 def verify_token():
-  Player = Query()
-  if not 'token' in request.json:
-    return { "verified": False }
-  token = request.json['token']
-  player = db.players.get(Player.token == token)
-  if not player:
-    return { "verified": False }
-  time_passed = time() - player['token_timestamp']
-  if time_passed > token_ttl:
-    db.players.update(delete('token_timestamp'), Player.id == player['id'])
-    db.players.update(delete('token'), Player.id == player['id'])
-    return { "verified": False }
-  return { "verified": True }
+  return token_operations.verify_token(request, 'players')
 
 # Narrator requests
 
@@ -126,34 +108,18 @@ def set_admin_password():
 
 @app.route('/admin/verify-token', methods=['POST'])
 def verify_admin_token():
-  Narrator = Query()
-  if not 'token' in request.json:
-    return { "verified": False }
-  token = request.json['token']
-  narrator = db.narrator.get(Narrator.token == token)
-  if not narrator:
-    return { "verified": False }
-  time_passed = time() - narrator['token_timestamp']
-  if time_passed > token_ttl:
-    db.narrator.update(delete('token_timestamp'), Narrator.id == narrator['id'])
-    db.narrator.update(delete('token'), Narrator.id == narrator['id'])
-    return { "verified": False }
-  return { "verified": True }
-
+  return token_operations.verify_token(request, 'narrator')
 
 @app.route('/admin/password', methods=['POST'])
 def is_admin_password_valid():
   try:
     password = request.json['password']
-    is_password_valid = len(db.narrator.get(Query().password == password)) > 0
-    if is_password_valid:
-      token = str(uuid1())
-      db.narrator.update({
-        'token': token,
-        'token_timestamp': time()
-      }, Query().password == password)
-      return { 'isPasswordValid': True,'token': token }
-    return { 'isPasswordValid': False }
+    narrator = db.narrator.get(Query().password == password)
+    is_password_valid = len(narrator) > 0
+    if not is_password_valid:
+      return { 'isPasswordValid': False }
+    token = token_operations.add_token_data_to_instance(narrator['id'], 'narrator')
+    return { 'isPasswordValid': True,'token': token }
   except (IndexError, TypeError, KeyError):
     return { 'isPasswordValid': False }
 
