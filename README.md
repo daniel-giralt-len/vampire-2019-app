@@ -1,3 +1,5 @@
+![Image showing a character sheet](README-media\cover-image.png)
+
 ## What is this?
 
 The world of Vampire: The Masquerade is canonically set in the world of today. That means usage of smartphones is encouraged in-game.
