@@ -66,5 +66,9 @@
   "admin.password.set.button": "Set",
   "admin.password.set.refresh": "Setting password...",
   "admin.password.input.instruction": "Well met, Narrator. Input the password.",
-  "admin.password.input.button": "Enter"
+  "admin.password.input.button": "Enter",
+  "admin.navigator.date": "Time",
+  "admin.date.hours.label": "Hours",
+  "admin.date.minutes.label": "Minutes",
+  "admin.date.save": "Save"
 }

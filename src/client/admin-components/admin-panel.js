@@ -16,7 +16,7 @@ const AdminPanel = ({t}) => {
         <Navigator/>
         <div>
           <a name='date'/>
-          <h1>{t('navigator.date')}</h1>
+          <h1>{t('admin.navigator.date')}</h1>
           <DateSetter />
         </div>
         <div>

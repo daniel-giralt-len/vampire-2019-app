@@ -66,5 +66,9 @@
   "admin.password.set.button": "Crear",
   "admin.password.set.refresh": "Creant contrassenya...",
   "admin.password.input.instruction": "Benvingut, Narrador. Introdueixi la contrassenya.",
-  "admin.password.input.button": "Entrar"
+  "admin.password.input.button": "Entrar",
+  "admin.navigator.date": "Hora",
+  "admin.date.hours.label": "Hores",
+  "admin.date.minutes.label": "Minuts",
+  "admin.date.save": "Guardar"
 }

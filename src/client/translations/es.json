@@ -66,5 +66,9 @@
   "admin.password.set.button": "Crear",
   "admin.password.set.refresh": "Creando contraseña...",
   "admin.password.input.instruction": "Bienvenido, Narrador. Introduzca la contraseña.",
-  "admin.password.input.button": "Entrar"
+  "admin.password.input.button": "Entrar",
+  "admin.navigator.date": "Hora",
+  "admin.date.hours.label": "Horas",
+  "admin.date.minutes.label": "Minutos",
+  "admin.date.save": "Guardar"
 }
