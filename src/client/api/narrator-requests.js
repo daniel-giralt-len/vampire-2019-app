@@ -47,6 +47,16 @@ const narratorRequests = {
           body: JSON.stringify({ epoch: epoch })
       }
     ).then(res => res.json())
+  },
+  setWeather: weather => {
+    return fetch(
+      `${baseURL}/weather`,
+      {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ weather: weather })
+      }
+    ).then(res => res.json())
   }
 }
 

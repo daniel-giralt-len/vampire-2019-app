@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Navigator from './navigator'
 import translate from '../translate-component'
 import DateSetter from '../admin-components/date-setter'
+import WeatherSetter from '../admin-components/weather-setter'
 
 const StyledLayout = styled.div`
     display: flex;
@@ -18,6 +19,11 @@ const AdminPanel = ({t}) => {
           <a name='date'/>
           <h1>{t('admin.navigator.date')}</h1>
           <DateSetter />
+        </div>
+        <div>
+          <a name='date'/>
+          <h1>{t('admin.navigator.weather')}</h1>
+          <WeatherSetter />
         </div>
         <div>
           <a name='map'/>
