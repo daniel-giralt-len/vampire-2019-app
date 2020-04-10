@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import translate from '../translate-component'
 import styled from 'styled-components'
-import Navigation from './navigation'
+import Navigator from './navigator'
 
 const StyledLayout = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ const StyledLayout = styled.div`
 const AdminPanel = ({t}) => {
   return (
       <StyledLayout>
-        <Navigation/>
+        <Navigator/>
         <div><a name='map'/>
           <h1>{t('navigator.map')}</h1>
         </div>

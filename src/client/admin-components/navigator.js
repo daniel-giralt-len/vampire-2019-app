@@ -22,7 +22,7 @@ const Anchor = styled.a`
   }
 `
 
-const Navigation = ({t, theme}) => {
+const Navigator = ({t, theme}) => {
   return (
       <StyledHeader>
         <Anchor href='#map'>{t('navigator.map')}</Anchor>
@@ -35,4 +35,4 @@ const Navigation = ({t, theme}) => {
   )
 }
 
-export default translate(Navigation)
+export default translate(Navigator)
