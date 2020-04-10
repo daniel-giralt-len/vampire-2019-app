@@ -60,18 +60,21 @@ const parseEpochToReadable = epoch => {
 const Header = ({ onThemeToggle, onLanguageChange, t, theme }) => {
   const [isConfigOpen, setConfig] = useState(false)
   const [epoch, setEpoch] = useState(null)
+  const [weatherType, setWeatherType] = useState(null)
   const toggleConfigMenu = () => setConfig(!isConfigOpen)
   const language = useContext(Language)
 
   useEffect(() => {
     API.getEpoch()
       .then(({epoch}) => setEpoch(epoch))
+    API.getWeather()
+      .then(({weather}) => setWeatherType(weather))
   }, [])
 
   return (
     <div>
       <StyledHeader>
-        <div>Rainy</div>
+        <div>{weatherType && t(`weather.${weatherType}`)}</div>
         <div>{parseEpochToReadable(epoch)}</div>
         <SvgContainer onClick={toggleConfigMenu} ><Cog width='1.2em' height='1.2em' /></SvgContainer>
       </StyledHeader>

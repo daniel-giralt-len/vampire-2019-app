@@ -34,6 +34,10 @@ const API = {
         return fetch(`${baseURL}/date`)
             .then(res => res.json())
     },
+    getWeather: () => {
+        return fetch(`${baseURL}/weather`)
+            .then(res => res.json())
+    },
     ...playerRequests,
     ...narratorRequests,
 }

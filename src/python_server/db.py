@@ -6,7 +6,7 @@ characters = _db.table('characters')
 players = _db.table('players')
 narrator = _db.table('narrator')
 date = _db.table('date')
-weather = _db.table('weather')P
+weather = _db.table('weather')
 tables = {
   "maps": maps,
   "characters": characters,
