@@ -37,6 +37,16 @@ const narratorRequests = {
             })
         }
     ).then(res => res.json())
+  },
+  setDate: epoch => {
+    return fetch(
+      `${baseURL}/date`,
+      {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ epoch: epoch })
+      }
+    ).then(res => res.json())
   }
 }
 
