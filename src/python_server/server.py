@@ -92,6 +92,31 @@ def set_date():
   except (IndexError, TypeError, KeyError):
     return { }
 
+def ensure_weather_init():
+  if len(db.weather)==0:
+    db.weather.insert({"id":0, "weather": ""})
+
+@app.route('/weather', methods=['GET'])
+def get_weather():
+  try:
+    ensure_weather_init()
+    weather = db.weather.get(Query().id == 0)['weather']
+    return { 'weather': weather }
+  except (IndexError, TypeError, KeyError):
+    return { }
+
+@app.route('/weather', methods=['POST'])
+def set_weather():
+  try:
+    ensure_weather_init()
+    weather = request.json['weather']
+    db.weather.update({
+      "weather": weather,
+    }, Query().id == 0)
+    return { }
+  except (IndexError, TypeError, KeyError):
+    return { }
+
 # Player requests
 
 @app.route('/verify-password', methods=['POST'])
