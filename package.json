@@ -7,14 +7,9 @@
     "server:dev": "cd ./src/python_server && ./server.py",
     "build": "webpack --mode production"
   },
-  "lint-staged": {
-    "src/*.js": [
-      "eslint --fix"
-    ]
-  },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "eslint --fix src"
     }
   },
   "license": "MIT",
@@ -29,11 +24,10 @@
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
     "babel-loader": "^8.0.6",
-    "eslint": "^6.5.1",
+    "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.16.0",
     "file-loader": "^4.2.0",
     "husky": "^4.2.5",
-    "lint-staged": "^10.0.0-0",
     "node-fetch": "^2.6.0",
     "nodemon": "^1.19.4",
     "ol": "^6.0.1",
