@@ -5,9 +5,12 @@ maps = _db.table('maps')
 characters = _db.table('characters')
 players = _db.table('players')
 narrator = _db.table('narrator')
+date = _db.table('date')
+
 tables = {
   "maps": maps,
   "characters": characters,
   "players": players,
-  "narrator": narrator
+  "narrator": narrator,
+  "date": date
 }

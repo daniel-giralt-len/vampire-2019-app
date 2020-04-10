@@ -4,6 +4,7 @@ from tinydb import Query
 from tinydb.operations import delete
 import db
 import token_operations
+from time import time
 
 app = Flask(__name__)
 CORS(app)
@@ -63,6 +64,19 @@ def update_theme():
       "theme": request.json['theme'],
     }, Query().token == request.json['token'])
     return { }
+  except (IndexError, TypeError, KeyError):
+    return { }
+
+def ensure_date_init():
+  if len(db.date)==0:
+    db.date.insert({"id":0, "timestamp": time()})
+
+@app.route('/date', methods=['GET'])
+def get_date():
+  try:
+    ensure_date_init()
+    timestamp = db.date.get(Query().id == 0)['timestamp']
+    return { 'epoch': timestamp * 1000 }
   except (IndexError, TypeError, KeyError):
     return { }
 

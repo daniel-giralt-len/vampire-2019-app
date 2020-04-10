@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Cog from '../svgs/cog'
 import translate, { availableLanguages, Language } from '../translate-component'
+import API from '../api'
 
 const StyledHeader = styled.header`
     background-color: ${({ theme }) => theme.red1};
@@ -48,15 +49,30 @@ const Toggle = styled.button`
 
 const SvgContainer = styled.div`display:flex;`
 
+const parseEpochToReadable = epoch => {
+  if(!epoch){
+    return '...'
+  }
+  const date = new Date(epoch)
+  return `${date.getHours()}:${date.getMinutes()}`
+}
+
 const Header = ({ onThemeToggle, onLanguageChange, t, theme }) => {
   const [isConfigOpen, setConfig] = useState(false)
+  const [epoch, setEpoch] = useState(null)
   const toggleConfigMenu = () => setConfig(!isConfigOpen)
   const language = useContext(Language)
+
+  useEffect(() => {
+    API.getEpoch()
+      .then(({epoch}) => setEpoch(epoch))
+  }, [])
+
   return (
     <div>
       <StyledHeader>
         <div>Rainy</div>
-        <div>13:52</div>
+        <div>{parseEpochToReadable(epoch)}</div>
         <SvgContainer onClick={toggleConfigMenu} ><Cog width='1.2em' height='1.2em' /></SvgContainer>
       </StyledHeader>
       {isConfigOpen && <ConfigMenu>

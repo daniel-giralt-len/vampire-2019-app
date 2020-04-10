@@ -30,6 +30,10 @@ const API = {
             })
             .then(res => res.json())
     },
+    getEpoch: () => {
+        return fetch(`${baseURL}/date`)
+            .then(res => res.json())
+    },
     ...playerRequests,
     ...narratorRequests,
 }
