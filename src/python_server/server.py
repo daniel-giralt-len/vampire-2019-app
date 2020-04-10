@@ -80,6 +80,18 @@ def get_date():
   except (IndexError, TypeError, KeyError):
     return { }
 
+@app.route('/date', methods=['POST'])
+def set_date():
+  try:
+    ensure_date_init()
+    timestamp = request.json['epoch'] / 1000
+    db.date.update({
+      "timestamp": timestamp,
+    }, Query().id == 0)
+    return { }
+  except (IndexError, TypeError, KeyError):
+    return { }
+
 # Player requests
 
 @app.route('/verify-password', methods=['POST'])
