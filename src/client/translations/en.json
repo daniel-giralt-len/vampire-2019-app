@@ -71,6 +71,7 @@
   "admin.date.hours.label": "Hours",
   "admin.date.minutes.label": "Minutes",
   "admin.date.save": "Save",
+  "admin.weather.save": "Save",
   "weather.partially_cloudy": "Partially cloudy",
   "weather.cloudy": "Cloudy",
   "weather.rainy": "Rainy",

@@ -71,6 +71,7 @@
   "admin.date.hours.label": "Horas",
   "admin.date.minutes.label": "Minutos",
   "admin.date.save": "Guardar",
+  "admin.weather.save": "Guardar",
   "weather.partially_cloudy": "Medio nublado",
   "weather.cloudy": "Nublado",
   "weather.rainy": "Lluvia",
