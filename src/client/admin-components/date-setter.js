@@ -11,14 +11,15 @@ const DateSetter = ({ t }) => {
     const newDate = new Date(epoch)
     newDate.setHours(hours)
     newDate.setMinutes(minutes)
-    API.setDate(newDate.getTime())
+    API.setDate(newDate.getTime()/1000)
   }
 
   useEffect(() => {
     API.getEpoch()
       .then(({epoch}) => {
-        const date = new Date(epoch)
-        setEpoch(epoch)
+        const date = new Date(epoch*1000)
+        console.log(date)
+        setEpoch(epoch*1000)
         setHours(date.getHours())
         setMinutes(date.getMinutes())
       })

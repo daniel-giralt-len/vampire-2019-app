@@ -66,7 +66,7 @@ const Header = ({ onThemeToggle, onLanguageChange, t, theme }) => {
 
   useEffect(() => {
     API.getEpoch()
-      .then(({epoch}) => setEpoch(epoch))
+      .then(({epoch}) => setEpoch(epoch*1000))
     API.getWeather()
       .then(({weather}) => setWeatherType(weather))
   }, [])

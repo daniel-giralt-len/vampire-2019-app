@@ -74,7 +74,7 @@ def get_date():
 
 @app.route('/date', methods=['POST'])
 def set_date():
-  timestamp = request.json['epoch'] / 1000
+  timestamp = request.json['epoch']
   return instance.set('date', timestamp)
 
 @app.route('/weather', methods=['GET'])
