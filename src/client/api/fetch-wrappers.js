@@ -5,10 +5,13 @@ const get = (subPath) => {
   return fetch(`${baseURL}/${subPath}`)
       .then(res => res.json())
 }
-const post = (subPath, body) => {
+const post = (subPath, body) => bodyRequest(subPath, body, 'POST')
+const put = (subPath, body) => bodyRequest(subPath, body, 'PUT')
+
+const bodyRequest = (subPath, body, method) => {
   return fetch(`${baseURL}/${subPath}`, 
       { 
-          method: 'POST', 
+          method, 
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body)
       })
@@ -17,5 +20,6 @@ const post = (subPath, body) => {
 
 export {
   get,
-  post
+  post,
+  put
 }

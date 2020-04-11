@@ -38,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
       margin: 0;
   }
-  button, input {
+  button, input, textarea {
     font-family: 'Venetian 301';
     font-size: inherit;
     font-weight: inherit;

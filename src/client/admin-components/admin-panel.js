@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Navigator from './navigator'
 import translate from '../translate-component'
 import DateSetter from '../admin-components/date-setter'
+import NewsSetter from '../admin-components/news-setter'
 import WeatherSetter from '../admin-components/weather-setter'
 
 const StyledLayout = styled.div`
@@ -40,6 +41,7 @@ const AdminPanel = ({t}) => {
         <div>
           <a name='news'/>
           <h1>{t('navigator.news')}</h1>
+          <NewsSetter />
         </div>
         <div>
           <a name='sheets'/>
