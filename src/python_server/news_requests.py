@@ -11,7 +11,7 @@ def add_news_article():
     article_id = db.news.insert({ 
       'header': header, 
       'body': body,
-      'archive': False
+      'archived': False
     })
     return { 'article_id': article_id }
   except (IndexError, TypeError, KeyError):
