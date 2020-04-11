@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from tinydb import Query
-from tinydb.operations import delete
 import db
 import token_operations
 import single_instance_operations as instance
