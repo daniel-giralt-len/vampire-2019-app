@@ -3,7 +3,7 @@ from app import app
 from tinydb import Query
 import db
 
-@app.route('/news', methods=['POST'])
+@app.route('/news', methods=['PUT'])
 def add_news_article():
   try:
     header = request.json['header']
@@ -27,13 +27,16 @@ def get_all_news():
   except (IndexError, TypeError, KeyError):
     return { }
 
-@app.route('/news/archive', methods=['POST'])
+@app.route('/news', methods=['POST'])
 def archive_news_articles():
   try:
-    id_to_archived = request.json
-    for article_id, is_archived in id_to_archived.items():
-      print(article_id, is_archived)
-      db.news.update({ 'archived': is_archived }, eids = [int(article_id)])
+    articles = request.json
+    for article in articles:
+      db.news.update({ 
+        'header': article['header'],
+        'body': article['body'],
+        'archived': article['archived']
+      }, eids = [article['id']])
     return { }
   except (IndexError, TypeError, KeyError):
     return { }
