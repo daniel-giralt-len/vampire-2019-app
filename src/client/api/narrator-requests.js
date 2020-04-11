@@ -1,63 +1,12 @@
-import fetch from 'node-fetch'
-
-import baseURL from './url'
+import { get, post } from './fetch-wrappers'
 
 const narratorRequests = {
-  isAdminPasswordSet: () => {
-    return fetch(`${baseURL}/admin-password-set`)
-        .then(res => res.json())
-  },
-  setAdminPassword: (password) => {
-    return fetch(`${baseURL}/admin-password-set`, 
-        { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({password})
-        })
-        .then(res => res.json())
-  },
-  checkAdminPassword: password => {
-    return fetch(
-        `${baseURL}/admin/password`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({password})
-        }
-    ).then(res => res.json())
-  },
-  verifyAdminToken: token => {
-    return fetch(
-        `${baseURL}/admin/verify-token`,
-        {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                token: token
-            })
-        }
-    ).then(res => res.json())
-  },
-  setDate: epoch => {
-    return fetch(
-      `${baseURL}/date`,
-      {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ epoch: epoch })
-      }
-    ).then(res => res.json())
-  },
-  setWeather: weather => {
-    return fetch(
-      `${baseURL}/weather`,
-      {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ weather: weather })
-      }
-    ).then(res => res.json())
-  }
+  isAdminPasswordSet: () => get('admin-password-set'),
+  setAdminPassword: password => post('admin-password-set', {password}),
+  checkAdminPassword: password => post('admin/password', {password}),
+  verifyAdminToken: token => post('admin/verify-token', {token}),
+  setDate: epoch => post('date', {epoch}),
+  setWeather: weather => post('weather', {weather})
 }
 
 export default narratorRequests

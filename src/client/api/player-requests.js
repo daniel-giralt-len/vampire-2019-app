@@ -1,32 +1,8 @@
-import fetch from 'node-fetch'
-
-import baseURL from './url'
+import { post } from './fetch-wrappers'
 
 const playerRequests = {
-    verifyPassword: password => {
-        return fetch(
-            `${baseURL}/verify-password`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    password: password
-                })
-            }
-        ).then(res => res.json())
-    },
-    verifyToken: token => {
-        return fetch(
-            `${baseURL}/verify-token`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    token: token
-                })
-            }
-        ).then(res => res.json())
-    }
+    verifyPassword: password => post('verify-password', {password}),
+    verifyToken: token => post('verify-token', {token})
 }
 
 export default playerRequests
