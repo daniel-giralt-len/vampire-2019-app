@@ -70,5 +70,12 @@
   "admin.navigator.date": "Hora",
   "admin.date.hours.label": "Hores",
   "admin.date.minutes.label": "Minuts",
-  "admin.date.save": "Guardar"
+  "admin.date.save": "Guardar",
+  "weather.partially_cloudy": "Mig ennuvolat",
+  "weather.cloudy": "Núvol",
+  "weather.rainy": "Pluja",
+  "weather.clear": "Clar",
+  "weather.day": "DIA",
+  "weather.stormy": "Tempesta",
+  "weather.tornado": "Huracà"
 }

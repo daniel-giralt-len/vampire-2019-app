@@ -70,5 +70,12 @@
   "admin.navigator.date": "Time",
   "admin.date.hours.label": "Hours",
   "admin.date.minutes.label": "Minutes",
-  "admin.date.save": "Save"
+  "admin.date.save": "Save",
+  "weather.partially_cloudy": "Partially cloudy",
+  "weather.cloudy": "Cloudy",
+  "weather.rainy": "Rainy",
+  "weather.clear": "Clear",
+  "weather.day": "Day",
+  "weather.stormy": "Stormy",
+  "weather.tornado": "Tornado"
 }
