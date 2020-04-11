@@ -42,6 +42,7 @@ const WeatherSetter = ({ t }) => {
               name='weather'
               value={type}
               onChange={event => setWeatherType(event.target.value)}
+              checked={type === weatherType}
             />
             <label htmlFor={type}>
               {t(`weather.${type}`)}
