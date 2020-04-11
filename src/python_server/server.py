@@ -1,14 +1,14 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
+from flask import jsonify, request
 from tinydb import Query
 import db
+from app import app
+
+import news_requests
+
 import token_operations
 import single_instance_operations as instance
 
 from time import time
-
-app = Flask(__name__)
-CORS(app)
 
 @app.route('/')
 def hello_world():
