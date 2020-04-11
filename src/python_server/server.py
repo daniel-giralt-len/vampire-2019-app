@@ -4,6 +4,8 @@ from tinydb import Query
 from tinydb.operations import delete
 import db
 import token_operations
+import single_instance_operations as instance
+
 from time import time
 
 app = Flask(__name__)
@@ -67,55 +69,23 @@ def update_theme():
   except (IndexError, TypeError, KeyError):
     return { }
 
-def ensure_date_init():
-  if len(db.date)==0:
-    db.date.insert({"id":0, "timestamp": time()})
-
 @app.route('/date', methods=['GET'])
 def get_date():
-  try:
-    ensure_date_init()
-    timestamp = db.date.get(Query().id == 0)['timestamp']
-    return { 'epoch': timestamp * 1000 }
-  except (IndexError, TypeError, KeyError):
-    return { }
+  return instance.get('date')
 
 @app.route('/date', methods=['POST'])
 def set_date():
-  try:
-    ensure_date_init()
-    timestamp = request.json['epoch'] / 1000
-    db.date.update({
-      "timestamp": timestamp,
-    }, Query().id == 0)
-    return { }
-  except (IndexError, TypeError, KeyError):
-    return { }
-
-def ensure_weather_init():
-  if len(db.weather)==0:
-    db.weather.insert({"id":0, "weather": ""})
+  timestamp = request.json['epoch'] / 1000
+  return instance.set('date', timestamp)
 
 @app.route('/weather', methods=['GET'])
 def get_weather():
-  try:
-    ensure_weather_init()
-    weather = db.weather.get(Query().id == 0)['weather']
-    return { 'weather': weather }
-  except (IndexError, TypeError, KeyError):
-    return { }
+  return instance.get('weather')
 
 @app.route('/weather', methods=['POST'])
 def set_weather():
-  try:
-    ensure_weather_init()
-    weather = request.json['weather']
-    db.weather.update({
-      "weather": weather,
-    }, Query().id == 0)
-    return { }
-  except (IndexError, TypeError, KeyError):
-    return { }
+  weather = request.json['weather']
+  return instance.set('weather', weather)
 
 # Player requests
 
