@@ -69,6 +69,7 @@
   "admin.password.input.button": "Entrar",
   "admin.navigator.date": "Hora",
   "admin.navigator.weather": "Temps",
+  "admin.navigator.sheets": "Fitxes",
   "admin.date.hours.label": "Hores",
   "admin.date.minutes.label": "Minuts",
   "admin.date.save": "Guardar",

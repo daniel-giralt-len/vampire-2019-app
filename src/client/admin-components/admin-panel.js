@@ -42,8 +42,8 @@ const AdminPanel = ({t}) => {
           <h1>{t('navigator.news')}</h1>
         </div>
         <div>
-          <a name='status'/>
-          <h1>{t('navigator.status')}</h1>
+          <a name='sheets'/>
+          <h1>{t('admin.navigator.sheets')}</h1>
         </div>
         <div>
           <a name='relationships'/>

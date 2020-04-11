@@ -31,7 +31,7 @@ const Navigator = ({t}) => {
         <Anchor href='#messenger'>{t('navigator.messenger')}</Anchor>
         <Anchor href='#couterie'>{t('navigator.couterie')}</Anchor>
         <Anchor href='#news'>{t('navigator.news')}</Anchor>
-        <Anchor href='#status'>{t('navigator.status')}</Anchor>
+        <Anchor href='#sheets'>{t('admin.navigator.sheets')}</Anchor>
         <Anchor href='#relationships'>{t('navigator.bonds')}</Anchor>
       </StyledHeader>
   )

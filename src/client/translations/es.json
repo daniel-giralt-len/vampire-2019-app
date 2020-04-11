@@ -69,6 +69,7 @@
   "admin.password.input.button": "Entrar",
   "admin.navigator.date": "Hora",
   "admin.navigator.weather": "Tiempo",
+  "admin.navigator.sheets": "Fichas",
   "admin.date.hours.label": "Horas",
   "admin.date.minutes.label": "Minutos",
   "admin.date.save": "Guardar",
