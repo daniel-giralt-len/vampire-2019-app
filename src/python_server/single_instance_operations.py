@@ -9,9 +9,9 @@ def get(table_name):
   try:
     _ensure_instance_init(table_name)
     value = db.tables[table_name].get(Query().id == 0)['value']
-    return { 'value': value }
+    return value
   except (IndexError, TypeError, KeyError):
-    return { }
+    return None
 
 def set(table_name, value):
   try:

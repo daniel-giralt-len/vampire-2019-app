@@ -70,7 +70,7 @@ def update_theme():
 
 @app.route('/date', methods=['GET'])
 def get_date():
-  return instance.get('date')
+  return { 'epoch': instance.get('date') }
 
 @app.route('/date', methods=['POST'])
 def set_date():
@@ -79,7 +79,7 @@ def set_date():
 
 @app.route('/weather', methods=['GET'])
 def get_weather():
-  return instance.get('weather')
+  return { 'weather': instance.get('weather') }
 
 @app.route('/weather', methods=['POST'])
 def set_weather():
