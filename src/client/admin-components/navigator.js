@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import translate from '../translate-component'
 import styled from 'styled-components'
 
@@ -22,9 +22,11 @@ const Anchor = styled.a`
   }
 `
 
-const Navigator = ({t, theme}) => {
+const Navigator = ({t}) => {
   return (
       <StyledHeader>
+        <Anchor href='#date'>{t('admin.navigator.date')}</Anchor>
+        <Anchor href='#weather'>{t('admin.navigator.weather')}</Anchor>
         <Anchor href='#map'>{t('navigator.map')}</Anchor>
         <Anchor href='#messenger'>{t('navigator.messenger')}</Anchor>
         <Anchor href='#couterie'>{t('navigator.couterie')}</Anchor>

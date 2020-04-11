@@ -21,7 +21,7 @@ const AdminPanel = ({t}) => {
           <DateSetter />
         </div>
         <div>
-          <a name='date'/>
+          <a name='weather'/>
           <h1>{t('admin.navigator.weather')}</h1>
           <WeatherSetter />
         </div>
