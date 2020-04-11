@@ -68,6 +68,7 @@
   "admin.password.input.instruction": "Bienvenido, Narrador. Introduzca la contraseña.",
   "admin.password.input.button": "Entrar",
   "admin.navigator.date": "Hora",
+  "admin.navigator.weather": "Tiempo",
   "admin.date.hours.label": "Horas",
   "admin.date.minutes.label": "Minutos",
   "admin.date.save": "Guardar",

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 import translate from '../translate-component'
 import API from '../api'
 
@@ -11,6 +12,12 @@ const weatherTypes = [
   'stormy',
   'tornado'
 ]
+
+const WeatherOption = styled.div`
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 10px;
+`
 
 const WeatherSetter = ({ t }) => {
   const [weatherType, setWeatherType] = useState(null)
@@ -28,7 +35,7 @@ const WeatherSetter = ({ t }) => {
     <React.Fragment>
       <div>
         {weatherTypes.map(type => (
-          <div key={type}>
+          <WeatherOption key={type}>
             <input 
               type='radio'
               id={type}
@@ -39,7 +46,7 @@ const WeatherSetter = ({ t }) => {
             <label htmlFor={type}>
               {t(`weather.${type}`)}
             </label>
-          </div>
+          </WeatherOption>
         ))}
       </div>
       <button onClick={saveWeather} >

@@ -68,6 +68,7 @@
   "admin.password.input.instruction": "Benvingut, Narrador. Introdueixi la contrassenya.",
   "admin.password.input.button": "Entrar",
   "admin.navigator.date": "Hora",
+  "admin.navigator.weather": "Temps",
   "admin.date.hours.label": "Hores",
   "admin.date.minutes.label": "Minuts",
   "admin.date.save": "Guardar",

@@ -68,6 +68,7 @@
   "admin.password.input.instruction": "Well met, Narrator. Input the password.",
   "admin.password.input.button": "Enter",
   "admin.navigator.date": "Time",
+  "admin.navigator.weather": "Weather",
   "admin.date.hours.label": "Hours",
   "admin.date.minutes.label": "Minutes",
   "admin.date.save": "Save",
