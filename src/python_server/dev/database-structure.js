@@ -1,4 +1,10 @@
-const { int, string, stringFromList, float, intRange, boolean } = require('./database-element-generators')
+const { int, 
+  string, 
+  stringFromList, 
+  float, 
+  intRange, 
+  boolean,
+  url } = require('./database-element-generators')
 
 const structure = {
   "players": [
@@ -127,9 +133,9 @@ const structure = {
       "anxiety": intRange(0,5),
       "humanity": intRange(0,10),
       "avatars": {
-        "ok": string('url'),
-        "hurt": string('url'),
-        "letargy": string('url'),
+        "ok": url('ok'),
+        "hurt": url('hurt'),
+        "letargy": url('letargy'),
       },
       "danger": stringFromList(["ok","hurt","letargy"])
     }

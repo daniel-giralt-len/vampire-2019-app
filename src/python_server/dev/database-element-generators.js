@@ -45,11 +45,24 @@ const intRange = (min, max) => ({
 const boolean = {
   generate: () => Math.random > 0.5 ? true : false
 }
+const url = type => ({
+  generate: () => {
+    switch(type){
+      case 'hurt':
+        return './dist/doomslayer_hurt.png'
+      case 'letargy':
+        return './dist/doomslayer_letargy.png'
+      default:
+        return './dist/doomslayer_ok.png'
+    }
+  }
+})
 module.exports = {
   int,
   string,
   stringFromList,
   float,
   intRange,
-  boolean
+  boolean,
+  url
 }
