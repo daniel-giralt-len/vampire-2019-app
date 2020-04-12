@@ -7,11 +7,17 @@ const NewsBody = styled.main`
     height: 100%;
 `
 
+const ArticleWrapper = styled.section`
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  border-bottom: 1px solid ${({theme}) => theme.grey1}
+`
+
 const Article = ({header, body}) => (
-  <section>
-    <div>{header}</div>
+  <ArticleWrapper>
+    <h1>{header}</h1>
     <div>{body}</div>
-  </section>
+  </ArticleWrapper>
 )
 
 const News = () => {
