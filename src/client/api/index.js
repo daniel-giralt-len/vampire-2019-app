@@ -11,7 +11,6 @@ const API = {
     setTheme: ({token, theme}) => post('theme', {token, theme}),
     getEpoch: () => get('date'),
     getWeather: () => get('weather'),
-    getNews: () => get('news'),
     ...playerRequests,
     ...narratorRequests,
 }

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import translate from '../translate-component'
 import NewArticleForm from './new-article-form'
 import ArticleForm from './article-form'
+import sortNews from '../operations/news-sort'
 import API from '../api'
 
 const MarginedArticleForm = styled(ArticleForm)`
@@ -16,17 +17,11 @@ const DistancedUpdateButton = styled.button`
   max-width: 900px;
 `
 
-const sortById = (a,b) => {
-  if(a.id > b.id) return 1
-  if(a.id < b.id) return -1
-  return 0
-}
-
 const NewsSetter = ({t}) => {
   const [news, setNews] = useState([])
 
   useEffect(() => {
-    API.getNews()
+    API.getAllNews()
       .then(setNews)
   }, [])
 
@@ -60,7 +55,7 @@ const NewsSetter = ({t}) => {
     <DistancedUpdateButton onClick={saveArticles}>
       {t('admin.news.button.update')}
     </DistancedUpdateButton>
-    {news.sort(sortById).reverse().map(({id, header, body, archived}) => (
+    {sortNews(news).map(({id, header, body, archived}) => (
       <MarginedArticleForm 
         key={id}
         articleId={id}

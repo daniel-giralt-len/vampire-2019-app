@@ -8,7 +8,8 @@ const narratorRequests = {
   setDate: epoch => post('date', {epoch}),
   setWeather: weather => post('weather', {weather}),
   addNewsArticle: ({header, body, archived}) => put('news', {header, body, archived}),
-  updateNewsArticles: articles => post('news', articles)
+  updateNewsArticles: articles => post('news', articles),
+  getAllNews: () => get('news'),
 }
 
 export default narratorRequests

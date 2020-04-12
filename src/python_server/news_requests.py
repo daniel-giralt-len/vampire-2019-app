@@ -27,6 +27,16 @@ def get_all_news():
   except (IndexError, TypeError, KeyError):
     return { }
 
+@app.route('/news/fresh', methods=['GET'])
+def get_fresh_news():
+  try:
+    news = db.news.search(Query().archived == False)
+    for a in news:
+      a['id'] = a.eid
+    return jsonify(news)
+  except (IndexError, TypeError, KeyError):
+    return { }
+
 @app.route('/news', methods=['POST'])
 def archive_news_articles():
   try:
