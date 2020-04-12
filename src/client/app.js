@@ -47,9 +47,6 @@ const GlobalStyle = createGlobalStyle`
     background: none;
     padding: 0
   }
-  input {
-    border: 2px solid ${({ theme }) => theme.font};
-  }
   #root {
       height: 100%;
   }

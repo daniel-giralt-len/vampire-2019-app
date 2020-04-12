@@ -6,15 +6,26 @@ import DateSetter from '../admin-components/date-setter'
 import NewsSetter from '../admin-components/news-setter'
 import WeatherSetter from '../admin-components/weather-setter'
 
-const StyledLayout = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+const PanelWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  input {
+    border: 2px solid ${({ theme }) => theme.font};
+    padding: 0px 3px;
+  }
+  textarea {
+    resize: none;
+    border: 2px solid black;
+    padding: 0px 3px;
+    height: 3em;
+  }
 `
 
 const AdminPanel = ({t}) => {
   return (
-      <StyledLayout>
+      <PanelWrapper>
         <Navigator/>
         <div>
           <a name='date'/>
@@ -52,6 +63,7 @@ const AdminPanel = ({t}) => {
           <h1>{t('navigator.bonds')}</h1>
         </div>
       </StyledLayout>
+      </PanelWrapper>
   )
 }
 

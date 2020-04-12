@@ -5,6 +5,10 @@ import NewArticleForm from './new-article-form'
 import ArticleForm from './article-form'
 import API from '../api'
 
+const MarginedArticleForm = styled(ArticleForm)`
+  margin-bottom: 20px;
+`
+
 const sortById = (a,b) => {
   if(a.id > b.id) return 1
   if(a.id < b.id) return -1
@@ -50,7 +54,7 @@ const NewsSetter = ({t}) => {
       {t('admin.news.button.update')}
     </button>
     {news.sort(sortById).reverse().map(({id, header, body, archived}) => (
-      <ArticleForm 
+      <MarginedArticleForm 
         key={id}
         articleId={id}
         header={header}
