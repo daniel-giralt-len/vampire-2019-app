@@ -1,48 +1,81 @@
 import React, { useState, useEffect } from 'react'
 import translate from '../translate-component'
+import styled from 'styled-components'
 import API from '../api'
 
+const dateToInputValue = date => {
+  try{
+    return date.toISOString().split('T')[0]
+  }catch(e){
+    return '0000-00-00'
+  }
+}
+
+const SmallTimeInput = styled.input`
+  width: 2em;
+  text-align: right;
+`
+
+const DateInput = styled.input``
+
+const SaveButton = styled.button`
+  margin-left: 0.5em;
+`
+
 const DateSetter = ({ t }) => {
-  const [hours, setHours] = useState(null)
-  const [minutes, setMinutes] = useState(null)
-  const [epoch, setEpoch] = useState(null)
+  const [jsDate, setJsDate] = useState(new Date(0))
 
   const saveDate = () => {
-    const newDate = new Date(epoch)
-    newDate.setHours(hours)
-    newDate.setMinutes(minutes)
-    API.setDate(newDate.getTime()/1000)
+    API.setDate(jsDate.getTime()/1000)
   }
 
   useEffect(() => {
     API.getEpoch()
       .then(({epoch}) => {
         const date = new Date(epoch*1000)
-        console.log(date)
-        setEpoch(epoch*1000)
-        setHours(date.getHours())
-        setMinutes(date.getMinutes())
+        setJsDate(date)
       })
   }, [])
 
+
+  const changeISODate = event => {
+    const newDate = new Date(event.target.value)
+    newDate.setHours(jsDate.getHours())
+    newDate.setMinutes(jsDate.getMinutes())
+    setJsDate(newDate)
+  }
+
   return (
     <React.Fragment>
-      <input 
+      <DateInput 
+        type='date' 
+        value={dateToInputValue(jsDate)}
+        onChange={changeISODate}
+      />
+      <SmallTimeInput 
         type='number' 
         name={t('admin.date.hours.label')}
-        value={hours ? hours : 0}
-        onChange={event => setHours(event.target.value)}
+        value={jsDate.getHours()}
+        onChange={event => {
+          const newDate = new Date(jsDate.getTime())
+          newDate.setHours(event.target.value)
+          setJsDate(newDate)
+        }}
       />
       :
-      <input 
+      <SmallTimeInput 
         type='number' 
         name={t('admin.date.minutes.label')}
-        value={minutes ? minutes : 0}
-        onChange={event => setMinutes(event.target.value)}
+        value={jsDate.getMinutes()}
+        onChange={event => {
+          const newDate = new Date(jsDate.getTime())
+          newDate.setMinutes(event.target.value)
+          setJsDate(newDate)
+        }}
       />
-      <button onClick={saveDate} >
+      <SaveButton onClick={saveDate} >
         {t('admin.date.save')}
-      </button>
+      </SaveButton>
     </React.Fragment>
   )
 }
