@@ -27,42 +27,41 @@ const AdminPanel = ({t}) => {
   return (
       <PanelWrapper>
         <Navigator/>
-        <div>
+        <section>
           <a name='date'/>
           <h1>{t('admin.navigator.date')}</h1>
           <DateSetter />
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='weather'/>
           <h1>{t('admin.navigator.weather')}</h1>
           <WeatherSetter />
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='map'/>
           <h1>{t('navigator.map')}</h1>
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='messenger'/>
           <h1>{t('navigator.messenger')}</h1>
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='couterie'/>
           <h1>{t('navigator.couterie')}</h1>
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='news'/>
           <h1>{t('navigator.news')}</h1>
           <NewsSetter />
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='sheets'/>
           <h1>{t('admin.navigator.sheets')}</h1>
-        </div>
-        <div>
+        </section>
+        <section>
           <a name='relationships'/>
           <h1>{t('navigator.bonds')}</h1>
-        </div>
-      </StyledLayout>
+        </section>
       </PanelWrapper>
   )
 }
