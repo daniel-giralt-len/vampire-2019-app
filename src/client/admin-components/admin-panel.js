@@ -33,6 +33,10 @@ const PanelWrapper = styled.div`
       color:${({ theme }) => theme.background};
     }
   }
+
+  h1 {
+    margin-bottom: 5px;
+  }
 `
 
 const AdminPanel = ({t}) => {
