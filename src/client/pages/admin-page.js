@@ -15,6 +15,10 @@ const CenteringWrapper = styled.main`
   align-items: center;
   flex-direction: column;
   padding: 20px;
+  input {
+    border: 2px solid ${({ theme }) => theme.font};
+    padding: 0px 3px;
+  }
 `
 
 const AdminPage = ({t}) => {

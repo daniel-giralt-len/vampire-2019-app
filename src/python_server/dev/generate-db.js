@@ -51,9 +51,11 @@ const generateTable = (tableName, nElements) => {
   const isList = Array.isArray(tableStructure)
   if(isList){
     const elementStructure = tableStructure[0]
-    return Array(nElements)
+    const table = {}
+    Array(nElements)
       .fill()
-      .map(() => generateTableElement(elementStructure))
+      .forEach((_, i) => table[i] = generateTableElement(elementStructure))
+    return table
   }
   return generateTableElement(tableStructure)
 }
