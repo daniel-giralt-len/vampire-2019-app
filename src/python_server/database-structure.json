@@ -1,0 +1,138 @@
+{
+  "players": {
+      "0": {
+          "id": int,
+          "password": String(/^[A-J]{8}$/),
+          "token": String (utid1),
+          "token_timestamp": float (epoch),
+          "theme": StringFromList(["light", "dark"])
+      }
+  },
+  "narrator": {
+    "type": Element,
+    "password": String (unhashed),
+    "token": String (utid1),
+    "token_timestamp": float (epoch)
+  },
+  "date": {
+    "type": Element,
+    "id": int,
+    "value": float (epoch)
+  },
+  "weather": {
+    "type": Element,
+    "id": int,
+    "value": String (items from clsoed list)
+  },
+  "_default": {},
+  "maps": [
+    {
+      "id": int,
+      "location": {
+        "latitude": float,
+        "longitude": float
+      }
+    }
+  ],
+  "characters": [
+    {
+      "id": int,
+      "general":{
+        "name": String,
+        "clan": StringFromList([
+          "brujah", 
+          "gangrel",
+          "malkavian",
+          "nosferatu",
+          "toreador",
+          "tremer",
+          "ventrue",
+          "caitiff",
+          "thin_blooad"
+        ])
+        "player": String,
+      },
+      "stats": {
+        "attributes": {
+          "strength": IntRange(0,5),
+          "dexterity": IntRange(0,5),
+          "resistance": IntRange(0,5),
+          "charisma": IntRange(0,5),
+          "manipulation": IntRange(0,5),
+          "composure": IntRange(0,5),
+          "intelligence": IntRange(0,5),
+          "wits": IntRange(0,5),
+          "resolve": IntRange(0,5)
+        },
+        "skills": {
+          "firearms": IntRange(0,5),
+          "crafts": IntRange(0,5),
+          "athletics": IntRange(0,5),
+          "driving": IntRange(0,5),
+          "robbery": IntRange(0,5),
+          "fight": IntRange(0,5),
+          "weapon": IntRange(0,5),
+          "stealth": IntRange(0,5),
+          "survival": IntRange(0,5),
+          "streetSmarts": IntRange(0,5),
+          "etiquette": IntRange(0,5),
+          "performance": IntRange(0,5),
+          "intimidation": IntRange(0,5),
+          "leadership": IntRange(0,5),
+          "insight": IntRange(0,5),
+          "persuasion": IntRange(0,5),
+          "subterfuge": IntRange(0,5),
+          "animalHandling": IntRange(0,5),
+          "academia": IntRange(0,5),
+          "science": IntRange(0,5),
+          "conscience": IntRange(0,5),
+          "finances": IntRange(0,5),
+          "investigation": IntRange(0,5),
+          "medicine": IntRange(0,5),
+          "occult": IntRange(0,5),
+          "politics": IntRange(0,5),
+          "technology": IntRange(0,5)
+        },
+        "disciplines": {
+          "animalism": IntRange(0,5),
+          "auspex": IntRange(0,5),
+          "celerity": IntRange(0,5),
+          "dominate": IntRange(0,5),
+          "fortitude": IntRange(0,5),
+          "obfuscate": IntRange(0,5),
+          "potence": IntRange(0,5),
+          "presence": IntRange(0,5),
+          "protean": IntRange(0,5),
+          "blood_sorcery": IntRange(0,5),
+          "ceremonies": IntRange(0,5),
+          "thin-blood_alchemy:" IntRange(0,5)
+        }
+      },
+      "damage": {
+        "physical": {
+          "superficial": IntRange(0,10),
+          "aggravated": IntRange(0,10),
+        },
+        "willpower":{
+          "superficial": IntRange(0,10),
+          "aggravated": IntRange(0,10),
+        }
+      },
+      "anxiety": IntRange(0,5),
+      "humanity": IntRange(0,10),
+      "avatars": {
+        "ok": String (url),
+        "hurt": String (url),
+        "letargy": String (url),
+      },
+      "danger": StringFromList(["ok","hurt","letargy"])
+    }
+  ],
+  "news": [
+    {
+      "header": String,
+      "body": String,
+      "archived": Boolean
+    }
+  ]
+}
