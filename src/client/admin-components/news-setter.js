@@ -9,6 +9,13 @@ const MarginedArticleForm = styled(ArticleForm)`
   margin-bottom: 20px;
 `
 
+const DistancedUpdateButton = styled.button`
+  margin-top: 40px;
+  margin-bottom: 10px;
+  width: 100%;
+  max-width: 900px;
+`
+
 const sortById = (a,b) => {
   if(a.id > b.id) return 1
   if(a.id < b.id) return -1
@@ -50,9 +57,9 @@ const NewsSetter = ({t}) => {
 
   return (<div>
     <NewArticleForm onSave={createNewArticle} />
-    <button onClick={saveArticles}>
+    <DistancedUpdateButton onClick={saveArticles}>
       {t('admin.news.button.update')}
-    </button>
+    </DistancedUpdateButton>
     {news.sort(sortById).reverse().map(({id, header, body, archived}) => (
       <MarginedArticleForm 
         key={id}
