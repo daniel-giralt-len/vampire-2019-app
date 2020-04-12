@@ -21,6 +21,18 @@ const PanelWrapper = styled.div`
     padding: 0px 3px;
     height: 3em;
   }
+
+  button {
+    outline: 0;
+    border: 3px solid ${({ theme }) => theme.font};
+    :hover {
+      background-color: ${({ theme }) => theme.grey1};
+    }
+    :active {
+      background-color: ${({ theme }) => theme.font};
+      color:${({ theme }) => theme.background};
+    }
+  }
 `
 
 const AdminPanel = ({t}) => {
