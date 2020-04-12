@@ -49,11 +49,11 @@ const url = type => ({
   generate: () => {
     switch(type){
       case 'hurt':
-        return './dist/doomslayer_hurt.png'
+        return 'doomslayer_hurt.png'
       case 'letargy':
-        return './dist/doomslayer_letargy.png'
+        return 'doomslayer_letargy.png'
       default:
-        return './dist/doomslayer_ok.png'
+        return 'doomslayer_ok.png'
     }
   }
 })

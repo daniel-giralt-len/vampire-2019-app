@@ -63,6 +63,7 @@ const structure = {
           "thin_blooad"
         ]),
         "player": string(),
+        "generation": int,
       },
       "stats": {
         "attributes": {
