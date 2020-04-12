@@ -1,59 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import translate from '../translate-component'
+import NewArticleForm from './new-article-form'
+import ArticleForm from './article-form'
 import API from '../api'
 
-const ArticleFormWrapper = styled.div``
-
-const UntranslatedArticleForm = ({
-  header, 
-  body, 
-  archived, 
-  articleId,
-  t, 
-  onSave,
-  buttonLabel
-}) => {
-  const [headerValue, setHeader] = useState(header)
-  const [bodyValue, setBody] = useState(body)
-  const [archivedValue, setArchived] = useState(archived)
-
-  const updateHeader = e => setHeader(e.target.value)
-  const updateBody = e => setBody(e.target.value)
-  const updateArchived = e => setArchived(e.target.checked)
-
-  const performSave = () => onSave({
-    articleId,
-    header: headerValue,
-    body: bodyValue,
-    archived: archivedValue
-  })
-
-  return (<ArticleFormWrapper>
-    <input type='text'
-       name={t('admin.news.input.header')}
-       id='news-header'
-       onChange={updateHeader}
-       value={headerValue}
-    />
-    <input type='checkbox' 
-      name={t('admin.news.input.archived')}
-      id='news-archived'
-      onChange={updateArchived}
-      checked={archivedValue}
-    />
-    <label htmlFor='news-archived'>{t('admin.news.archived')}</label>
-    <textarea 
-      name={t('admin.news.input.body')}
-      id='news-body'
-      onChange={updateBody}
-      value={bodyValue}
-    />
-    <button onClick={performSave} >{t(`admin.news.button.${buttonLabel}`)}</button>
-  </ArticleFormWrapper>)
+const sortById = (a,b) => {
+  if(a.id > b.id) return 1
+  if(a.id < b.id) return -1
+  return 0
 }
-
-const ArticleForm = translate(UntranslatedArticleForm)
 
 const NewsSetter = ({t}) => {
   const [news, setNews] = useState([])
@@ -63,9 +19,48 @@ const NewsSetter = ({t}) => {
       .then(setNews)
   }, [])
 
-  return (<div>
-    <ArticleForm onSave={API.addNewsArticle} />
+  const createNewArticle = ({header, body, archived}) => {
+    API.addNewsArticle({header, body, archived})
+      .then(({articleId}) => setNews([
+        ...news,
+        { header, body, archived, id: articleId }
+      ]))
+  }
 
+  const updateArticle = ({id, key, value}) => {
+    const newNews = [...news]
+    const article = news.find(article => article.id === id)
+    
+    console.log(id,key,value,article)
+    if(!article){ return }
+    
+    article[key] = value
+    setNews(newNews)
+  }
+
+  const saveArticles = () => API.updateNewsArticles(news)
+
+  const onHeaderChange = (id, value) => updateArticle({id, key: 'header', value})
+  const onBodyChange = (id, value) => updateArticle({id, key: 'body', value})
+  const onArchivedChange = (id, value) => updateArticle({id, key: 'archived', value})
+
+  return (<div>
+    <NewArticleForm onSave={createNewArticle} />
+    <button onClick={saveArticles}>
+      {t('admin.news.button.update')}
+    </button>
+    {news.sort(sortById).reverse().map(({id, header, body, archived}) => (
+      <ArticleForm 
+        key={id}
+        articleId={id}
+        header={header}
+        body={body}
+        archived={archived}
+        onHeaderChange={onHeaderChange}
+        onBodyChange={onBodyChange}
+        onArchivedChange={onArchivedChange}
+      />
+    ))}
     </div>)
 }
 

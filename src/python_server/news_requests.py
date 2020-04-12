@@ -13,7 +13,7 @@ def add_news_article():
       'body': body,
       'archived': False
     })
-    return { 'article_id': article_id }
+    return { 'articleId': article_id }
   except (IndexError, TypeError, KeyError):
     return { }
 

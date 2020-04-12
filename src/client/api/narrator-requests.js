@@ -7,7 +7,8 @@ const narratorRequests = {
   verifyAdminToken: token => post('admin/verify-token', {token}),
   setDate: epoch => post('date', {epoch}),
   setWeather: weather => post('weather', {weather}),
-  addNewsArticle: ({header, body, archived}) => put('news', {header, body, archived})
+  addNewsArticle: ({header, body, archived}) => put('news', {header, body, archived}),
+  updateNewsArticles: articles => post('news', articles)
 }
 
 export default narratorRequests
