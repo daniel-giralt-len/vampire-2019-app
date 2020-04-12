@@ -2,7 +2,18 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import translate from '../translate-component'
 
-const ArticleFormWrapper = styled.div``
+
+const ArticleFormWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "header button"
+    "body body";
+  row-gap: 5px;
+  column-gap: 15px;
+  max-width: 900px;
+`
 
 const NewArticleForm = ({
   t, 
@@ -32,13 +43,20 @@ const NewArticleForm = ({
        id='news-header'
        onChange={updateHeader}
        value={headerValue}
+       style={{gridArea:'header'}}
     />
-    <button onClick={performSave} >{t(`admin.news.button.create`)}</button>
+    <button 
+      onClick={performSave} 
+      style={{gridArea:'button'}}
+    >
+      {t(`admin.news.button.create`)}
+    </button>
     <textarea 
       name={t('admin.news.input.body')}
       id='news-body'
       onChange={updateBody}
       value={bodyValue}
+      style={{gridArea:'body'}}
     />
   </ArticleFormWrapper>)
 }

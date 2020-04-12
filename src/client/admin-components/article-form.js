@@ -39,14 +39,20 @@ const ArticleForm = ({
        value={header}
        style={{gridArea:'header'}}
     />
-    <ArchivedWrapper style={{gridArea:'archived'}}>
+    <ArchivedWrapper 
+      style={{gridArea:'archived'}}
+    >
       <input type='checkbox' 
         name={t('admin.news.input.archived')}
         id='news-archived'
         onChange={e => onArchivedChange(articleId, e.target.checked)}
         checked={archived}
       />
-      <label htmlFor='news-archived'>{t('admin.news.archived')}</label>
+      <label 
+        onClick={() => onArchivedChange(articleId, !archived)}
+      >
+        {t('admin.news.archived')}
+      </label>
     </ArchivedWrapper>
     <textarea 
       name={t('admin.news.input.body')}
